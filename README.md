@@ -204,11 +204,11 @@ eevveerryyddaayy-template/
 
 ## Contributing
 
-* TBD
+* This project is not accepting contributions at this time.
 
 ## Acknowledgments
 
-* TBD
+* Coeus
 
 ## Screenshots
 
