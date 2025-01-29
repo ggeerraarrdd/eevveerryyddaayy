@@ -1,4 +1,4 @@
-# eevveerryyddaayy-dev
+# eevveerryyddaayy
 
 A Github template repository for documenting technical skill-building challenges
 
@@ -10,7 +10,7 @@ A Github template repository for documenting technical skill-building challenges
 
 <!-- markdownlint-enable MD028 -->
 > [!NOTE]
-> This is the documentation for the [`eevveerryyddaayy-template`](https://github.com/ggeerraarrdd/) repository.
+> This is the documentation for the Github template repository `eevveerryyddaayy` located [here](https://github.com/ggeerraarrdd/eevveerryyddaayy-template/).
 
 `eevveerryyddaayy` is a Github template repository intended for those who want to simplify the process of documenting their self-learning journey. Whether you are a student fresh out of college or an experienced developer in the workforce, this platform helps track your daily practice, skill-building challenges or technical interview preparation progress in one organized space.
 
@@ -100,18 +100,18 @@ eevveerryyddaayy-template/
 
 1. **Follow Github's documentation on [Creating a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)**
 
-    * The template repository is located at [`eevveerryyddaayy-template`](/README.md).
+    * The template repository is located [here](https://github.com/ggeerraarrdd/eevveerryyddaayy-template/).
 
-2. **Clone the repository**
+2. **Clone the new repository**
 
     ```bash
-    git clone https://github.com/ggeerraarrdd/eevveerryyddaayy.git
+    git clone <your-repository-url>
     ```
 
 3. **Navigate into the project directory**
 
     ```bash
-    cd eevveerryyddaayy-template # For example
+    cd <your-new-directory>
     ```
 
 4. **Create and activate a virtual environment**
@@ -200,7 +200,7 @@ eevveerryyddaayy-template/
 
 ## License
 
-* [MIT License](https://github.com/ggeerraarrdd/sql-everyday/blob/main/LICENSE)
+* [MIT License](https://github.com/ggeerraarrdd/eevveerryyddaayy/blob/main/LICENSE)
 
 ## Contributing
 
