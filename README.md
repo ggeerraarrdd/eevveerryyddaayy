@@ -214,6 +214,8 @@ eevveerryyddaayy-template/
 
 ![eevveerryyddaayy](docs/screenshot1.png)
 
+![eevveerryyddaayy](docs/screenshot2.png)
+
 ## Frontispiece
 
 Buddy Holly and The Crickets performing "That'll Be The Day" [Still from broadcast]. The Ed Sullivan Show. CBS, December 1, 1957.
