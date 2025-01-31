@@ -89,6 +89,7 @@ eevveerryyddaayy-template/
 
 * Python 3.12 (not tested on other versions)
 * Familiarity with Jupyter Notebooks
+* Familiarty with VS Code
 
 ## Getting Started
 
@@ -103,6 +104,10 @@ eevveerryyddaayy-template/
     * The template repository is located [here](https://github.com/ggeerraarrdd/eevveerryyddaayy-template/).
 
 2. **Clone the new repository**
+
+    * Open VS Code and then a terminal widow.
+    * Navigate to where you want the repository directory saved.
+    * Run the following command:
 
     ```bash
     git clone <your-repository-url>
@@ -121,11 +126,25 @@ eevveerryyddaayy-template/
     source venv/bin/activate  # On Windows use `venv\Scripts\activate`
     ```
 
-5. **Install the dependencies**
+5. **Update pip**
+
+    ```bash
+    pip install --upgrade pip
+    ```
+
+6. **Install the dependencies**
 
     ```bash
     pip install -r requirements.txt
     ```
+
+7. **Install the Jupyter extension**
+
+    1. Go to the Extensions Marketplace on VS Code.
+    2. Search for "Jupyter" by Microsoft.
+    3. Click `Install`
+
+    **NOTE:** Template repo tested only on v2024.11.0.
 
 ### Configuration
 
@@ -139,7 +158,7 @@ eevveerryyddaayy-template/
   
 2. **Customize Index table settings**
 
-    1. Open the `.env` file (with default settings) in the root directory
+    1. Open the `.env` file (with default settings) in the root directory.
 
         ```python
         # Extra Column
@@ -158,7 +177,11 @@ eevveerryyddaayy-template/
 
     **NOTE:** These settings cannot be changed after the project has been initialized (see Usage #2).
 
-3. **Personalize README**
+3. **Customize file template**
+
+    Open [`src/main/templates/solution.txt`](src/main/templates/solution.txt) and change "[ ] Everyday" to your preferred project name.
+
+4. **Customize README**
 
     Feel free to make any changes to README, including the title and description of your project.
 
@@ -167,13 +190,15 @@ eevveerryyddaayy-template/
 
 ### Usage
 
-1. Open `eevveerryyddaayy.ipynb` in the root directory.
+1. Open the project folder on VS Code, if not already.
 
-2. Execute the cell containing the python code or `Run All` to display the form interface.
+2. Open `eevveerryyddaayy.ipynb` in the root directory.
+
+3. Execute the cell containing the python code or `Run All` to display the form interface.
 
     **NOTE:** The project is initialized when this is done for the first time.
 
-3. Fill in the fields and click the submit button.
+4. Fill in the fields and click the submit button.
 
     Congratualtions! 🎉 You're a day closer to achieving your goal! 🎯
 
