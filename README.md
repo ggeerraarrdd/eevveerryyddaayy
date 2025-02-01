@@ -148,13 +148,17 @@ eevveerryyddaayy-template/
 
 ### Configuration
 
-1. **Default Index table settings**
+1. **Default Index table and Form settings**
 
+    **Index Table:**
     * The table contains 5 default columns. **You can add a 6th column.**
     * The name of an activated sixth column is "NB". **You can choose a different name.**
     * The first column uses sequential numbering (e.g. "001", "002"). **You can switch to date format.**
 
-    If you don't want to change these default settings, skip to #3.
+    **Form:**
+    * The default Site list in the Form includes: [Codewars](https://www.codewars.com/), [DataLemur](https://datalemur.com/) and [LeetCode](https://leetcode.com/). **You can add and remove.**
+
+    If you don't want to change these default settings, skip to #4.
   
 2. **Customize Index table settings**
 
@@ -177,11 +181,27 @@ eevveerryyddaayy-template/
 
     **NOTE:** These settings cannot be changed after the project has been initialized (see Usage #2).
 
-3. **Customize file template**
+3. **Customize Form settings**
+
+    1. If not already, open the `.env` file (with default settings) in the root directory.
+
+        ```python
+        # Form Settings
+        SITE_OPTIONS=["Codewars", "DataLemur", "LeetCode"]
+        ```
+
+    2. Add your preferred settings
+
+        * Edit your preferred sites as a list of strings.
+        * If there is only one item in the list, that site becomes the only option and default value. This is for when your project will involve only one site.
+
+    **NOTE:** Unlike the extra column and sequential numbering settings, you can change this setting again after project initiliazation.
+
+4. **Customize file template**
 
     Open [`src/main/templates/solution.txt`](src/main/templates/solution.txt) and change "[ ] Everyday" to your preferred project name.
 
-4. **Customize README**
+5. **Customize README**
 
     Feel free to make any changes to README, including the title and description of your project.
 
