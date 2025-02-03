@@ -10,7 +10,7 @@ A Github template repository for documenting technical skill-building challenges
 
 <!-- markdownlint-enable MD028 -->
 > [!NOTE]
-> This is the documentation for the Github template repository `eevveerryyddaayy` located [here](https://github.com/ggeerraarrdd/eevveerryyddaayy-template/).
+> This is the documentation for the Github template repository `eevveerryyddaayy` located [here](https://github.com/ggeerraarrdd/eevveerryyddaayy-template/), which is the templetized version of [`SQL Everyday`](https://github.com/ggeerraarrdd/sql-everyday).
 
 `eevveerryyddaayy` is a Github template repository intended for those who want to simplify the process of documenting their self-learning journey. Whether you are a student fresh out of college or an experienced developer in the workforce, this platform helps track your daily practice, skill-building challenges or technical interview preparation progress in one organized space.
 
