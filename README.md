@@ -105,40 +105,23 @@ eevveerryyddaayy-template/
 
 2. **Clone the new repository**
 
-    * Open VS Code and then a terminal widow.
+    * Open a terminal widow in VS Code.
     * Navigate to where you want the repository directory saved.
-    * Run the following command:
 
     ```bash
     git clone <your-repository-url>
     ```
 
-3. **Navigate into the project directory**
-
-    ```bash
-    cd <your-new-directory>
-    ```
-
-4. **Create and activate a virtual environment**
+3. **Setup a Python virtual environment**
 
     ```bash
     python3 -m venv venv
     source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-    ```
-
-5. **Update pip**
-
-    ```bash
     pip install --upgrade pip
-    ```
-
-6. **Install the dependencies**
-
-    ```bash
     pip install -r requirements.txt
     ```
 
-7. **Install the Jupyter extension**
+4. **Install the Jupyter extension**
 
     1. Go to the Extensions Marketplace on VS Code.
     2. Search for "Jupyter" by Microsoft.
@@ -199,7 +182,7 @@ eevveerryyddaayy-template/
 
 4. **Customize file template**
 
-    Open [`src/main/templates/solution.txt`](src/main/templates/solution.txt) and change "[ ] Everyday" to your preferred project name.
+    Open `src/main/templates/solution.txt` and change "[ ] Everyday" to your preferred project name.
 
 5. **Customize README**
 
