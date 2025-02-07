@@ -12,7 +12,7 @@ A Github template repository for documenting technical skill-building challenges
 > [!NOTE]
 > This is the documentation for the Github template repository [`eevveerryyddaayy-template`](https://github.com/ggeerraarrdd/eevveerryyddaayy-template/), which is the templetized version of [`SQL Everyday`](https://github.com/ggeerraarrdd/sql-everyday).
 
-`eevveerryyddaayy` is a Github template repository intended for those who want to simplify the process of documenting their self-learning journey. Whether you are a student fresh out of college or an experienced developer in the workforce, this platform helps track your daily practice, skill-building challenges or technical interview preparation progress in one organized space.
+`eevveerryyddaayy-template`, or simply `eevveerryyddaayy`, is a Github template repository intended for those who want to simplify the process of documenting their self-learning journey. Whether you are a student fresh out of college or an experienced developer in the workforce, this platform helps track your daily practice, skill-building challenges or technical interview preparation progress in one organized space.
 
 Think of it as a portfolio-builder. `eevveerryyddaayy` automates the process of file creation, organizing and storing, as well as indexing your record of personal achievements and development over time. This streamlining allows you to spend more time on what matters most - the actual learning.
 
@@ -42,11 +42,11 @@ _(Everyday, it's a gettin' closer / Goin' faster than a roller coaster / Push li
 
 ## Features
 
+* 🌐 Portfolio Builder - Transforms a Github repository into a coding portfolio website with README.md serving as the homepage
 * 📝 Automated File Management - Creates and organizes daily practice files
 * 🗂️ Automated Indexing - Creates and maintains a table of contents of your files for quick reference and access
 * 📊 Daily Progress Tracking - Visualizes your learning journey in tabular form
 * 📚 Solution Repository - Showcases different approaches to programming challenges
-* 📖 Educational Notes - Documents key programming concepts and techniques
 * ⚡ Jupyter Notebook Interface - Simplifies data entry through a form-like template
 
 ## Project Structure
@@ -80,6 +80,7 @@ eevveerryyddaayy-template/
 │
 ├── docs/
 ├── .gitignore
+├── .pylintrc
 ├── LICENSE
 ├── README.md
 └── requirements.txt
