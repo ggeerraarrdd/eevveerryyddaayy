@@ -10,7 +10,7 @@ A Github template repository for documenting technical skill-building challenges
 
 <!-- markdownlint-enable MD028 -->
 > [!NOTE]
-> This is the documentation for the Github template repository `eevveerryyddaayy` located [here](https://github.com/ggeerraarrdd/eevveerryyddaayy-template/), which is the templetized version of [`SQL Everyday`](https://github.com/ggeerraarrdd/sql-everyday).
+> This is the documentation for the Github template repository [`eevveerryyddaayy-template`](https://github.com/ggeerraarrdd/eevveerryyddaayy-template/), which is the templetized version of [`SQL Everyday`](https://github.com/ggeerraarrdd/sql-everyday).
 
 `eevveerryyddaayy` is a Github template repository intended for those who want to simplify the process of documenting their self-learning journey. Whether you are a student fresh out of college or an experienced developer in the workforce, this platform helps track your daily practice, skill-building challenges or technical interview preparation progress in one organized space.
 
@@ -123,11 +123,11 @@ eevveerryyddaayy-template/
 
 4. **Install the Jupyter extension**
 
+    ⚠️ **Note:** Template repo tested only on v2024.11.0.
+
     1. Go to the Extensions Marketplace on VS Code.
     2. Search for "Jupyter" by Microsoft.
     3. Click `Install`
-
-    **NOTE:** Template repo tested only on v2024.11.0.
 
 ### Configuration
 
@@ -144,6 +144,8 @@ eevveerryyddaayy-template/
     If you don't want to change these default settings, skip to #4.
   
 2. **Customize Index table settings**
+
+     ⚠️ **Note:** These settings cannot be changed after the project has been initialized (see Usage #2).
 
     1. Open the `.env` file (with default settings) in the root directory.
 
@@ -162,9 +164,9 @@ eevveerryyddaayy-template/
         * To change its default name: `NB_NAME="Your Preferred Name"`
         * To switch to date format: `NB=1`
 
-    **NOTE:** These settings cannot be changed after the project has been initialized (see Usage #2).
-
 3. **Customize Form settings**
+
+    ⚠️ **Note:** Unlike the extra column and sequential numbering settings, you can change this setting again after project initiliazation.
 
     1. If not already, open the `.env` file (with default settings) in the root directory.
 
@@ -177,8 +179,6 @@ eevveerryyddaayy-template/
 
         * Edit your preferred sites as a list of strings.
         * If there is only one item in the list, that site becomes the only option and default value. This is for when your project will involve only one site.
-
-    **NOTE:** Unlike the extra column and sequential numbering settings, you can change this setting again after project initiliazation.
 
 4. **Customize file template**
 
