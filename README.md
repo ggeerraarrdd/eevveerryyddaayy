@@ -165,11 +165,11 @@ eevveerryyddaayy-template/
     1. If not already, open the `.env` file (with default settings) in the root directory.
 
         ```python
-        # Extra Column
+        # Index Table: Extra Column
         NB=0
         NB_NAME="NB"
 
-        # Sequential Numbering
+        # Index Table: Sequential Numbering
         SEQ_NOTATION=0
         ```
 
@@ -186,7 +186,7 @@ eevveerryyddaayy-template/
     1. If not already, open the `.env` file (with default settings) in the root directory.
 
         ```python
-        # Form Settings
+        # Form: Site Options
         SITE_OPTIONS=["Codewars", "DataLemur", "LeetCode"]
         ```
 
