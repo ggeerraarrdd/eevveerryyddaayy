@@ -12,9 +12,9 @@ A Github template repository for documenting technical skill-building challenges
 > [!NOTE]
 > This is the documentation for the Github template repository [`eevveerryyddaayy-template`](https://github.com/ggeerraarrdd/eevveerryyddaayy-template/), which is the templetized version of [`SQL Everyday`](https://github.com/ggeerraarrdd/sql-everyday).
 
-`eevveerryyddaayy-template`, or simply `eevveerryyddaayy`, is a Github template repository intended for those who want to simplify the process of documenting their self-learning journey. Whether you are a student fresh out of college or an experienced developer in the workforce, this platform helps track your daily practice, skill-building challenges or technical interview preparation progress in one organized space.
+`eevveerryyddaayy-template`, or simply `eevveerryyddaayy`, is a Github template repository that helps you document your self-learning journey. It automates the process of file creation, organizing and storing, as well as indexing your record of personal achievements and development over time. This streamlining allows you to spend more time on what matters most—the actual learning.
 
-Think of it as a portfolio-builder. `eevveerryyddaayy` automates the process of file creation, organizing and storing, as well as indexing your record of personal achievements and development over time. This streamlining allows you to spend more time on what matters most - the actual learning.
+Whether you are a student fresh out of college or an experienced developer, this portfolio-building platform simplifies how you track your daily practice, skill-building challenges or technical interview preparation. It keeps all your progress organized in one place.
 
 ![The Crickets](docs/the_crickets.png)
 _(Everyday, it's a gettin' closer / Goin' faster than a roller coaster / Push like yours will surely come my way, a-hey, a-hey-hey / Push like yours will surely come my way)_
@@ -132,23 +132,37 @@ eevveerryyddaayy-template/
 
 ### Configuration
 
-1. **Default Index table and Form settings**
+1. **Default settings**
+
+    **Project Title:**
+    * The default title is "[ ] Everyday". **You can choose a different title.**
 
     **Index Table:**
-    * The table contains 5 default columns. **You can add a 6th column.**
-    * The name of an activated sixth column is "NB". **You can choose a different name.**
-    * The first column uses sequential numbering (e.g. "001", "002"). **You can switch to date format.**
+    * The default index table has 5 columns. **You can add a 6th column.**
+    * The default name of an activated sixth column is "NB". **You can choose a different name.**
+    * The first column uses sequential numbering as default (e.g. "001", "002"). **You can switch to date format.**
 
     **Form:**
     * The default Site list in the Form includes: [Codewars](https://www.codewars.com/), [DataLemur](https://datalemur.com/) and [LeetCode](https://leetcode.com/). **You can add and remove.**
 
-    If you don't want to change these default settings, skip to #4.
+    If you don't want to change these default settings, skip to #5.
   
-2. **Customize Index table settings**
+2. **Customize Project title**
+
+    ⚠️ **Note:** This changes the project title on README and template file during project initialization. Changing it after initialiation will be a manual process.
+
+    1. Open the `.env` file (with default settings) in the root directory.
+
+        ```python
+        # Project: Title
+        PROJ_TITLE='[ ] Everyday'
+        ```
+
+3. **Customize Index table settings**
 
      ⚠️ **Note:** These settings cannot be changed after the project has been initialized (see Usage #2).
 
-    1. Open the `.env` file (with default settings) in the root directory.
+    1. If not already, open the `.env` file (with default settings) in the root directory.
 
         ```python
         # Extra Column
@@ -165,7 +179,7 @@ eevveerryyddaayy-template/
         * To change its default name: `NB_NAME="Your Preferred Name"`
         * To switch to date format: `NB=1`
 
-3. **Customize Form settings**
+4. **Customize Form settings**
 
     ⚠️ **Note:** Unlike the extra column and sequential numbering settings, you can change this setting again after project initiliazation.
 
@@ -180,10 +194,6 @@ eevveerryyddaayy-template/
 
         * Edit your preferred sites as a list of strings.
         * If there is only one item in the list, that site becomes the only option and default value. This is for when your project will involve only one site.
-
-4. **Customize file template**
-
-    Open `src/main/templates/solution.txt` and change "[ ] Everyday" to your preferred project name.
 
 5. **Customize README**
 
@@ -222,10 +232,7 @@ eevveerryyddaayy-template/
 
 ## Future Work
 
-* Implement `SEQ_SPARSE`
-* Enhance error handling
-* Enhance configuration and input validations
-* Add unit tests
+* Filter for the `enhancement` label in [Issues](https://github.com/ggeerraarrdd/eevveerryyddaayy-template/issues).
 
 ## License
 
