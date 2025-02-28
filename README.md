@@ -10,7 +10,7 @@ A Github template repository for documenting technical skill-building challenges
 
 <!-- markdownlint-enable MD028 -->
 > [!NOTE]
-> This is the documentation for the Github template repository [`eevveerryyddaayy-template`](https://github.com/ggeerraarrdd/eevveerryyddaayy-template/), which is the templetized version of [`SQL Everyday`](https://github.com/ggeerraarrdd/sql-everyday).
+> This is the documentation for the Github template repository [`eevveerryyddaayy-template`](https://github.com/ggeerraarrdd/eevveerryyddaayy-template/), which is the templatized version of [`SQL Everyday`](https://github.com/ggeerraarrdd/sql-everyday).
 
 `eevveerryyddaayy-template`, or simply `eevveerryyddaayy`, is a Github template repository that helps you document your self-learning journey. It automates the process of file creation, organizing and storing, as well as indexing your record of personal achievements and development over time. This streamlining allows you to spend more time on what matters most—the actual learning.
 
@@ -113,7 +113,7 @@ eevveerryyddaayy-template/
 
 1. **Follow Github's documentation on [Creating a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)**
 
-    * The template repository is located [here](https://github.com/ggeerraarrdd/eevveerryyddaayy-template/).
+    👉 The template repository is located [here](https://github.com/ggeerraarrdd/eevveerryyddaayy-template/).
 
 2. **Clone the new repository**
 
@@ -121,7 +121,7 @@ eevveerryyddaayy-template/
     * Navigate to where you want the repository directory saved.
 
     ```bash
-    git clone <your-repository-url>
+    git clone your-repository-url
     ```
 
 3. **Setup a Python virtual environment**
@@ -197,7 +197,7 @@ eevveerryyddaayy-template/
 
 4. **Customize README**
 
-    ⚠️ **IMPORTANT** The Index table including its enclosing markdown comments must not be modified or deleted.
+    ⚠️ **IMPORTANT:** The Index table, including its enclosing markdown comments, can be placed elsewhere but must not be modified in any other way or deleted.
 
     Feel free to make any other changes to README, including the title and description of your project.
 
@@ -237,7 +237,7 @@ If you need to modify your project settings after initialization:
 
 ### Initial Release
 
-* `eevveerryyddaayy` is the templetized version of [`SQL Everyday`](https://github.com/ggeerraarrdd/sql-everyday).
+* `eevveerryyddaayy` is the templatized version of [`SQL Everyday`](https://github.com/ggeerraarrdd/sql-everyday).
 
 ## Future Work
 
