@@ -2,26 +2,13 @@
 
 A Github template repository for documenting technical skill-building challenges
 
-## Description
+## Table of Contents
 
 > [!NOTE]
 > ALL CONTENTS IN THIS REPO ARE FOR EDUCATIONAL PURPOSES ONLY.
-<!-- markdownlint-disable MD028 -->
-
-<!-- markdownlint-enable MD028 -->
-> [!NOTE]
-> This is the documentation for the Github template repository [`eevveerryyddaayy-template`](https://github.com/ggeerraarrdd/eevveerryyddaayy-template/), which is the templatized version of [`SQL Everyday`](https://github.com/ggeerraarrdd/sql-everyday).
-
-`eevveerryyddaayy-template`, or simply `eevveerryyddaayy`, is a Github template repository that helps you document your self-learning journey. It automates the process of file creation, organizing and storing, as well as indexing your record of personal achievements and development over time. This streamlining allows you to spend more time on what matters most—the actual learning.
-
-Whether you are a student fresh out of college or an experienced developer, this portfolio-building platform simplifies how you track your daily practice, skill-building challenges or technical interview preparation. It keeps all your progress organized in one place.
-
-![The Crickets](docs/the_crickets.png)
-_(Everyday, it's a gettin' closer / Goin' faster than a roller coaster / Push like yours will surely come my way, a-hey, a-hey-hey / Push like yours will surely come my way)_
-
-## Table of Contents
 
 * [Description](#description)
+* [Target Users](#target-users)
 * [Features](#features)
 * [Project Structure](#project-structure)
 * [Prerequisites](#prerequisites)
@@ -41,6 +28,28 @@ _(Everyday, it's a gettin' closer / Goin' faster than a roller coaster / Push li
 * [Contributing](#contributing)
 * [Acknowledgments](#acknowledgments)
 * [Screenshots](#screenshots)
+
+## Description
+
+`eevveerryyddaayy-template`, or simply `eevveerryyddaayy`, is a GitHub template repository. It is the templatized version of [SQL Everyday](https://github.com/ggeerraarrdd/sql-everyday), which was created to provide an automated and streamlined framework for documenting technical skill-building challenges and to serve as a coding portfolio.
+
+`eevveerryyddaayy` automates many of the tedious manual work associated with the documentation process, such as handling file creation and organizing project materials. This frees up more time on what matters most—the actual learning.
+
+Note that this repository contains only the documentation for `eevveerryyddaayy`. For the Github template repository itself, visit [here](https://github.com/ggeerraarrdd/eevveerryyddaayy-template/).
+
+![The Crickets](docs/the_crickets.png)
+_(Everyday, it's a gettin' closer / Goin' faster than a roller coaster / Push like yours will surely come my way, a-hey, a-hey-hey / Push like yours will surely come my way)_
+
+## Target Users
+
+`eevveerryyddaayy` is geared towards **self-directed learners**, such as:
+
+* **Those** committing to consistent technical skill practice.
+* **Those** seeking to track their progress for quick reference, knowledge retention and accountability.
+* **Those** wanting their record of daily practice organized into an accessible portfolio.
+* **Those** hoping to automate as much of the project management as possible.
+
+This Github template repository is ideal for intermediate users who are familiar with GitHub, Jupyter Notebooks and Markdown.
 
 ## Features
 
