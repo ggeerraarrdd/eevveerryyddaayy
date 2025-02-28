@@ -29,7 +29,9 @@ _(Everyday, it's a gettin' closer / Goin' faster than a roller coaster / Push li
   * [Dependencies](#dependencies)
   * [Installation](#installation)
   * [Configuration](#configuration)
-  * [Usage](#usage)
+* [Usage](#usage)
+* [System Administration](#system-administration)
+  * [Configuration Updates](#configuration-updates)
 * [Author(s)](#authors)
 * [Version History](#version-history)
   * [Release Notes](#release-notes)
@@ -45,6 +47,7 @@ _(Everyday, it's a gettin' closer / Goin' faster than a roller coaster / Push li
 * 🌐 Portfolio Builder - Transforms a Github repository into a coding portfolio website with README.md serving as the homepage
 * 📝 Automated File Management - Creates and organizes daily practice files
 * 🗂️ Automated Indexing - Creates and maintains a table of contents of your files for quick reference and access
+* ✨ Dynamic Markdown Tables - Intelligently adjust column widths to accommodate new content, maintaining alignment and readability
 * 📊 Daily Progress Tracking - Visualizes your learning journey in tabular form
 * 📚 Solution Repository - Showcases different approaches to programming challenges
 * ⚡ Jupyter Notebook Interface - Simplifies data entry through a form-like template
@@ -91,9 +94,14 @@ eevveerryyddaayy-template/
 
 ## Prerequisites
 
-* Python 3.12 (not tested on other versions)
-* Familiarity with Jupyter Notebooks
-* Familiarity with VS Code
+* **Python 3.12**
+  * Not tested on other versions
+* **VS Code** as your development environment
+* Familiarity with **Jupyter Notebooks**
+* **Jupyter extension** for VS Code
+  * Required for running notebook files
+  * **IMPORTANT**: Install specifically version `v2024.11.0` - not tested on any other version
+  * From VS Code marketplace: Extensions icon → ⚙️ icon next to Jupyter → Install Another Version → Select v2024.11.0
 
 ## Getting Started
 
@@ -125,13 +133,10 @@ eevveerryyddaayy-template/
     pip install -r requirements.txt
     ```
 
-4. **Install the Jupyter extension**
+4. **Rename VS Code settings file**
 
-    ⚠️ **Note:** Template repo tested only on v2024.11.0.
-
-    1. Go to the Extensions Marketplace on VS Code.
-    2. Search for "Jupyter" by Microsoft.
-    3. Click `Install`
+    * Navigate to the `.vscode` directory
+    * Rename `settings.template.json` to `settings.json`
 
 ### Configuration
 
@@ -152,7 +157,7 @@ eevveerryyddaayy-template/
   
 2. **Customize Project settings**
 
-    ⚠️ **Note:** You can customize your settings during initialization by using the `every_start.ipynb` notebook.
+    You can customize your settings during initialization by using the `every_start.ipynb` notebook.
 
     1. Open the `every_start.ipynb` notebook in the root directory.
     2. Modify the code cell containing configuration settings:
@@ -196,17 +201,7 @@ eevveerryyddaayy-template/
 
     Feel free to make any other changes to README, including the title and description of your project.
 
-5. **Configuration updates after initialization**
-
-    ⚠️ **Note:** Configuration updates after initialization will be supported in a future version.
-
-    If you need to modify your project settings after initialization:
-
-    * The upcoming feature will support configuration updates through `every_update.ipynb`.
-    * This will allow you to change project settings without starting from scratch.
-    * Currently, some settings like Index Table structure can only be set during initialization.
-
-### Usage
+## Usage
 
 1. Open the project folder on VS Code, if not already.
 
@@ -217,6 +212,18 @@ eevveerryyddaayy-template/
 4. Fill in the fields and click the submit button.
 
     🎉 Congratulations! You're a day closer to achieving your goal!
+
+## System Administration
+
+### **Configuration Updates**
+
+⚠️ **Note:** Configuration updates after initialization will be supported in a future version.
+
+If you need to modify your project settings after initialization:
+
+* The upcoming feature will support configuration updates through `every_update.ipynb`.
+* This will allow you to change project settings without starting from scratch.
+* Currently, some settings like Index Table structure can only be set during initialization.
 
 ## Author(s)
 
