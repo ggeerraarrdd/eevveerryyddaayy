@@ -57,27 +57,30 @@ eevveerryyddaayy-template/
 ├── src/
 │   ├── __init__.py
 │   │
-│   ├── main/
-│   │   ├── __init__.py
-│   │   │
-│   │   ├── config/
-│   │   │   └── __init__.py
-│   │   │
-│   │   ├── helpers/
-│   │   │   └── __init__.py
-│   │   │
-│   │   ├── templates/
-│   │   │
-│   │   ├── main.py
-│   │   └── notebook.py
+│   ├── config/
+│   │   └── __init__.py
 │   │
-│   └── tests/
-│       └── __init__.py
-│
+│   ├── forms/
+│   │   └── __init__.py
+│   │
+│   ├── handlers/
+│   │   └── __init__.py
+│   │
+│   ├── templates/
+│   │   └── __init__.py
+│   │
+│   ├── utils/
+│   │   └── __init__.py
+│   │
+│   └── app.py
+│   
 ├── solutions/
 │
-├── eevveerryyddaayy.ipynb
+├── every_entry.ipynb
+├── every_start.ipynb
+├── every_update.ipynb
 │
+├── .vscode
 ├── docs/
 ├── .gitignore
 ├── .pylintrc
@@ -147,74 +150,73 @@ eevveerryyddaayy-template/
 
     If you don't want to change these default settings, skip to #5.
   
-2. **Customize Project title**
+2. **Customize Project settings**
 
-    ⚠️ **Note:** This changes the project title on README and template file during project initialization. Changing it after initialiation will be a manual process.
+    ⚠️ **Note:** You can customize your settings during initialization by using the `evvery_start.ipynb` notebook.
 
-    1. Open the `.env` file (with default settings) in the root directory.
+    1. Open the `evvery_start.ipynb` notebook in the root directory.
+    2. Modify the code cell containing configuration settings:
 
         ```python
         # Project: Title
         PROJ_TITLE='[ ] Everyday'
-        ```
-
-3. **Customize Index table settings**
-
-     ⚠️ **Note:** These settings cannot be changed after the project has been initialized (see Usage #2).
-
-    1. If not already, open the `.env` file (with default settings) in the root directory.
-
-        ```python
+        
         # Index Table: Extra Column
         NB=0
         NB_NAME="NB"
-
+        
         # Index Table: Sequential Numbering
         SEQ_NOTATION=0
-        ```
 
-    2. Add your preferred settings
-
-        * To add a 6th column: `NB=1`
-        * To change its default name: `NB_NAME="Your Preferred Name"`
-        * To switch to date format: `NB=1`
-
-4. **Customize Form settings**
-
-    ⚠️ **Note:** Unlike the extra column and sequential numbering settings, you can change this setting again after project initiliazation.
-
-    1. If not already, open the `.env` file (with default settings) in the root directory.
-
-        ```python
+        # Index Table: Sequential Gaps
+        SEQ_SPARSE=0
+        
         # Form: Site Options
         SITE_OPTIONS=["Codewars", "DataLemur", "LeetCode"]
         ```
 
-    2. Add your preferred settings
+3. **Configuration options explained**
 
-        * Edit your preferred sites as a list of strings.
-        * If there is only one item in the list, that site becomes the only option and default value. This is for when your project will involve only one site.
+    **Project Title:**
+    * Change `PROJ_TITLE` to your preferred project title.
 
-5. **Customize README**
+    **Index Table:**
+    * To add a 6th column: `NB=1`
+    * To customize the 6th column name: `NB_NAME='Your Preferred Name'`
+    * To switch to date format instead of sequential numbering: `SEQ_NOTATION=1`
+    * To allow gaps in sequential numbering: `SEQ_SPARSE=1`
 
-    Feel free to make any changes to README, including the title and description of your project.
+    **Form:**
+    * Customize `SITE_OPTIONS` with your preferred sites as a list of strings.
+    * If there is only one item in the list, that site becomes the only option and default value.
 
-> [!IMPORTANT]  
-> The markdown comments around the Index table must not be modified or deleted.
+4. **Customize README**
+
+    ⚠️ **IMPORTANT** The Index table including its enclosing markdown comments must not be modified or deleted.
+
+    Feel free to make any other changes to README, including the title and description of your project.
+
+5. **Configuration updates after initialization**
+
+    ⚠️ **Note:** Configuration updates after initialization will be supported in a future version.
+
+    If you need to modify your project settings after initialization:
+
+    * The upcoming feature will support configuration updates through `evvery_update.ipynb`.
+    * This will allow you to change project settings without starting from scratch.
+    * Currently, some settings like Index Table structure can only be set during initialization.
 
 ### Usage
 
 1. Open the project folder on VS Code, if not already.
 
-2. Open `eevveerryyddaayy.ipynb` in the root directory.
+2. Open `every_entry.ipynb` in the root directory.
 
 3. Execute the cell containing the python code or `Run All` to display the form interface.
 
-    **NOTE:** The project is initialized when this is done for the first time.
-
 4. Fill in the fields and click the submit button.
 
-    Congratualtions! 🎉 You're a day closer to achieving your goal! 🎯
+    🎉 Congratualtions! You're a day closer to achieving your goal!
 
 ## Author(s)
 
