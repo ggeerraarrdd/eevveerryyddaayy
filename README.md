@@ -93,7 +93,7 @@ eevveerryyddaayy-template/
 
 * Python 3.12 (not tested on other versions)
 * Familiarity with Jupyter Notebooks
-* Familiarty with VS Code
+* Familiarity with VS Code
 
 ## Getting Started
 
@@ -109,7 +109,7 @@ eevveerryyddaayy-template/
 
 2. **Clone the new repository**
 
-    * Open a terminal widow in VS Code.
+    * Open a terminal window in VS Code.
     * Navigate to where you want the repository directory saved.
 
     ```bash
@@ -146,15 +146,15 @@ eevveerryyddaayy-template/
     * The first column uses sequential numbering as default (e.g. "001", "002"). **You can switch to date format.**
 
     **Form:**
-    * The default Site list in the Form includes: [Codewars](https://www.codewars.com/), [DataLemur](https://datalemur.com/) and [LeetCode](https://leetcode.com/). **You can add and remove.**
+    * The default Site list in the Form includes: [Codewars](https://www.codewars.com/), [DataLemur](https://datalemur.com/) and [LeetCode](https://leetcode.com/). **You can add or remove.**
 
-    If you don't want to change these default settings, skip to #5.
+    If you don't want to change these default settings, skip to #4.
   
 2. **Customize Project settings**
 
-    ⚠️ **Note:** You can customize your settings during initialization by using the `evvery_start.ipynb` notebook.
+    ⚠️ **Note:** You can customize your settings during initialization by using the `every_start.ipynb` notebook.
 
-    1. Open the `evvery_start.ipynb` notebook in the root directory.
+    1. Open the `every_start.ipynb` notebook in the root directory.
     2. Modify the code cell containing configuration settings:
 
         ```python
@@ -163,7 +163,7 @@ eevveerryyddaayy-template/
         
         # Index Table: Extra Column
         NB=0
-        NB_NAME="NB"
+        NB_NAME='NB'
         
         # Index Table: Sequential Numbering
         SEQ_NOTATION=0
@@ -172,7 +172,7 @@ eevveerryyddaayy-template/
         SEQ_SPARSE=0
         
         # Form: Site Options
-        SITE_OPTIONS=["Codewars", "DataLemur", "LeetCode"]
+        SITE_OPTIONS=['Codewars', 'DataLemur', 'LeetCode']
         ```
 
 3. **Configuration options explained**
@@ -202,7 +202,7 @@ eevveerryyddaayy-template/
 
     If you need to modify your project settings after initialization:
 
-    * The upcoming feature will support configuration updates through `evvery_update.ipynb`.
+    * The upcoming feature will support configuration updates through `every_update.ipynb`.
     * This will allow you to change project settings without starting from scratch.
     * Currently, some settings like Index Table structure can only be set during initialization.
 
@@ -216,7 +216,7 @@ eevveerryyddaayy-template/
 
 4. Fill in the fields and click the submit button.
 
-    🎉 Congratualtions! You're a day closer to achieving your goal!
+    🎉 Congratulations! You're a day closer to achieving your goal!
 
 ## Author(s)
 
@@ -226,7 +226,7 @@ eevveerryyddaayy-template/
 
 ### Release Notes
 
-* See [https://github.com/ggeerraarrdd/eevvrryyddaayy-template/releases](https://github.com/ggeerraarrdd/eevveerryyddaayy-template/releases)
+* See [https://github.com/ggeerraarrdd/eevveerryyddaayy-template/releases](https://github.com/ggeerraarrdd/eevveerryyddaayy-template/releases)
 
 ### Initial Release
 
