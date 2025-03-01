@@ -31,35 +31,33 @@ A Github template repository for documenting technical skill-building challenges
 
 ## Description
 
-`eevveerryyddaayy-template`, or simply `eevveerryyddaayy`, is a GitHub template repository. It is the templatized version of [SQL Everyday](https://github.com/ggeerraarrdd/sql-everyday), which was created to provide an automated and streamlined framework for documenting technical skill-building challenges and to serve as a coding portfolio.
+_eevveerryyddaayy-template_, or simply _eevveerryyddaayy_, is a GitHub template repository. It is the templatized version of [_SQL Everyday_](https://github.com/ggeerraarrdd/sql-everyday), a personal skill-building challenge that necessitated an automated and streamlined framework to enable consistent daily practice and to manage an ever-growing coding portfolio.
 
-`eevveerryyddaayy` automates many of the tedious manual work associated with the documentation process, such as handling file creation and organizing project materials. This frees up more time on what matters most—the actual learning.
+_eevveerryyddaayy_ automates many of the tedious manual work associated with the documentation process, such as handling file creation and organizing project materials. This frees up more time on what matters most—the actual learning.
 
-Note that this repository contains only the documentation for `eevveerryyddaayy`. For the Github template repository itself, visit [here](https://github.com/ggeerraarrdd/eevveerryyddaayy-template/).
+Note that this repository contains only the documentation for _eevveerryyddaayy_. For the Github template repository itself, go [here](https://github.com/ggeerraarrdd/eevveerryyddaayy-template/).
 
 ![The Crickets](docs/the_crickets.png)
 _(Everyday, it's a gettin' closer / Goin' faster than a roller coaster / Push like yours will surely come my way, a-hey, a-hey-hey / Push like yours will surely come my way)_
 
 ## Target Users
 
-`eevveerryyddaayy` is geared towards **self-directed learners**, such as:
+_eevveerryyddaayy_ is intended for **self-directed learners**, such as:
 
 * **Those** committing to consistent technical skill practice.
 * **Those** seeking to track their progress for quick reference, knowledge retention and accountability.
 * **Those** wanting their record of daily practice organized into an accessible portfolio.
 * **Those** hoping to automate as much of the project management as possible.
 
-This Github template repository is ideal for intermediate users who are familiar with GitHub, Jupyter Notebooks and Markdown.
-
 ## Features
 
-* 🌐 Portfolio Builder - Transforms a Github repository into a coding portfolio website with README.md serving as the homepage
-* 📝 Automated File Management - Creates and organizes daily practice files
-* 🗂️ Automated Indexing - Creates and maintains a table of contents of your files for quick reference and access
-* ✨ Dynamic Markdown Tables - Intelligently adjust column widths to accommodate new content, maintaining alignment and readability
-* 📊 Daily Progress Tracking - Visualizes your learning journey in tabular form
-* 📚 Solution Repository - Showcases different approaches to programming challenges
-* ⚡ Jupyter Notebook Interface - Simplifies data entry through a form-like template
+* 🌐 **Portfolio Builder** - Transforms a Github repository into a coding portfolio website with README.md serving as the homepage
+* 📝 **Automated File Management** - Creates and organizes daily practice files
+* 🗂️ **Automated Indexing** - Creates and maintains a table of contents of your files for quick reference and access
+* ✨ **Dynamic Markdown Tables** - Intelligently adjust column widths to accommodate new content, maintaining alignment and readability
+* 📊 **Daily Progress Tracking** - Visualizes your learning journey in tabular form
+* 📚 **Solution Repository** - Showcases different approaches to programming challenges
+* ⚡ **Jupyter Notebook Interface** - Simplifies data entry through a form-like template
 
 ## Project Structure
 
@@ -133,7 +131,7 @@ eevveerryyddaayy-template/
     git clone your-repository-url
     ```
 
-3. **Setup a Python virtual environment**
+3. **Set up a Python virtual environment**
 
     ```bash
     python3 -m venv venv
