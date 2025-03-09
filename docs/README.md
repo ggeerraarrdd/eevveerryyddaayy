@@ -1,3 +1,12 @@
+<!-- markdownlint-disable MD041 -->
+[![GitHub release](https://img.shields.io/github/v/release/ggeerraarrdd/eevveerryyddaayy)](https://github.com/ggeerraarrdd/eevveerryyddaayy/releases)
+[![Maintenance](https://img.shields.io/badge/maintained-yes-green.svg)](https://github.com/ggeerraarrdd/ggeerraarrdd/graphs/commit-activity)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/1efb93fd6a00425a9753ac43e73067a6)](https://app.codacy.com/gh/ggeerraarrdd/eevveerryyddaayy/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![codecov](https://codecov.io/gh/ggeerraarrdd/eevveerryyddaayy/graph/badge.svg?token=6IYLEF6I2Q)](https://codecov.io/gh/ggeerraarrdd/eevveerryyddaayy)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ggeerraarrdd_eevveerryyddaayy&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ggeerraarrdd_eevveerryyddaayy)
+[![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
+<!-- markdownlint-enable MD041 -->
+
 # eevveerryyddaayy
 
 A Github template repository for documenting technical skill-building challenges
@@ -36,7 +45,7 @@ _eevveerryyddaayy_ is a GitHub template repository. It is the templatized versio
 
 _eevveerryyddaayy_ automates many of the tedious manual work associated with the documentation process, such as handling file creation and organizing project materials. This frees up more time on what matters most—the actual learning.
 
-![The Crickets](images/the_crickets.png)
+![The Crickets](assets/images/the_crickets.png)
 _(Everyday, it's a gettin' closer / Goin' faster than a roller coaster / Skills like yours will surely come my way, a-hey, a-hey-hey / Skills like yours will surely come my way)_
 
 ## Target Users
@@ -84,11 +93,13 @@ eevveerryyddaayy/
 │   └── app.py
 │   
 ├── solutions/
+├── tests/
 │
 ├── every_entry.ipynb
 ├── every_start.ipynb
 ├── every_update.ipynb
 │
+├── .github
 ├── .vscode
 ├── assets/
 ├── docs/
@@ -315,9 +326,9 @@ If you need to modify your project settings after initialization:
 
 ## Screenshots
 
-![eevveerryyddaayy](images/screenshot1.png)
+![eevveerryyddaayy](assets/images/screenshot1.png)
 
-![eevveerryyddaayy](images/screenshot2.png)
+![eevveerryyddaayy](assets/images/screenshot2.png)
 
 ## Frontispiece
 
