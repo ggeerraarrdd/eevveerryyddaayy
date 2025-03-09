@@ -1,3 +1,12 @@
+<!-- markdownlint-disable MD041 -->
+[![GitHub release](https://img.shields.io/github/v/release/ggeerraarrdd/geofinder)](https://github.com/ggeerraarrdd/eevveerryyddaayy/releases)
+[![Maintenance](https://img.shields.io/badge/maintained-yes-green.svg)](https://github.com/ggeerraarrdd/portfoliofy/graphs/commit-activity)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/1efb93fd6a00425a9753ac43e73067a6)](https://app.codacy.com/gh/ggeerraarrdd/eevveerryyddaayy/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![codecov](https://codecov.io/gh/ggeerraarrdd/eevveerryyddaayy/graph/badge.svg?token=6IYLEF6I2Q)](https://codecov.io/gh/ggeerraarrdd/eevveerryyddaayy)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ggeerraarrdd_eevveerryyddaayy&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ggeerraarrdd_eevveerryyddaayy)
+[![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
+<!-- markdownlint-enable MD041 -->
+
 # eevveerryyddaayy
 
 A Github template repository for documenting technical skill-building challenges
