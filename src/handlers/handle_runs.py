@@ -201,7 +201,7 @@ def _handle_runs_prep_file(
 
 def _handle_runs_prep_index(
         config: ConfigManager,
-        seq_last: Optional[Union[int, datetime.date]], 
+        seq_last: Optional[Union[int, datetime.date]],
         seq_next: Union[int, datetime.date]
     ) -> int:
     """
@@ -555,8 +555,8 @@ def _handle_runs_close(
 
 
 def handle_runs(
-        config: ConfigManager, 
-        package: PackageManager, 
+        config: ConfigManager,
+        package: PackageManager,
         data: Dict[str, Any], today: datetime
     ) -> int:
     """

@@ -8,7 +8,6 @@ Jupyter notebook environment.
 
 # Python Standard Library
 from ast import literal_eval
-import json  # pylint: disable=unused-import
 from typing import Dict
 
 # Third-Party Libraries

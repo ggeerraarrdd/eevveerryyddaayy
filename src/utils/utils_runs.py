@@ -60,7 +60,7 @@ def get_files_created(config: ConfigManager, data: Dict[str, Any]) -> int:
     int
         1 on successful file creation
     """
-    with open(f'{config.get('TEMPLATES_DIR')}/solution.txt', 'r', encoding='utf-8') as file:
+    with open(f'{config.get("TEMPLATES_DIR")}/solution.txt', 'r', encoding='utf-8') as file:
         template_content = file.read()
 
     # Create a Jinja2 template object

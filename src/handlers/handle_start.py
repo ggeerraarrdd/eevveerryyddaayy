@@ -314,7 +314,7 @@ def _handle_start_template(
     """
     lines_template = []
 
-    with open(f'{config.get('TEMPLATES_DIR')}/solution.txt', 'r+', encoding='utf-8') as file:
+    with open(f'{config.get("TEMPLATES_DIR")}/solution.txt', 'r+', encoding='utf-8') as file:
         lines_template = file.readlines()
 
         # HANDLE TEMPLATE CHANGES - TITLE
