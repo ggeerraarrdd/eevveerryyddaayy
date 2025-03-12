@@ -6,7 +6,7 @@ Utility Functions for Project Runs
 from typing import Any, Dict
 
 # Third-Party Libraries
-from jinja2 import Template
+from jinja2 import Environment
 
 # Local
 from src.config import ConfigManager
@@ -64,7 +64,8 @@ def get_files_created(config: ConfigManager, data: Dict[str, Any]) -> int:
         template_content = file.read()
 
     # Create a Jinja2 template object
-    template = Template(template_content)
+    env = Environment(autoescape=True)
+    template = env.from_string(template_content)
 
     # Render the template with the data
     filled_document = template.render(data)
