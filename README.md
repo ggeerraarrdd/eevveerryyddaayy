@@ -45,8 +45,7 @@ _eevveerryyddaayy_ is a GitHub template repository. It is the templatized versio
 
 _eevveerryyddaayy_ automates many of the tedious manual work associated with the documentation process, such as handling file creation and organizing project materials. This frees up more time on what matters most—the actual learning.
 
-![The Crickets](assets/images/the_crickets.png)
-_(Everyday, it's a gettin' closer / Goin' faster than a roller coaster / Skills like yours will surely come my way, a-hey, a-hey-hey / Skills like yours will surely come my way)_
+<https://github.com/user-attachments/assets/70bc8cad-084e-400a-b0f7-446319ef54af>
 
 ## Target Users
 
