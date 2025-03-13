@@ -92,12 +92,15 @@ eevveerryyddaayy/
 │   │
 │   └── app.py
 │   
+├── settings/
+│   ├── start.ipynb
+│   └── update.ipynb
+│   
 ├── solutions/
+│
 ├── tests/
 │
-├── every_entry.ipynb
-├── every_start.ipynb
-├── every_update.ipynb
+├── EEVVEERRYYDDAAYY.ipynb
 │
 ├── .github
 ├── .vscode
@@ -131,11 +134,11 @@ eevveerryyddaayy/
 
 3. **Initialize project**
 
-   * Open `every_start.ipynb` in VS Code.
+   * Open `settings/start.ipynb` in VS Code.
    * Run all cells to initialize with default settings.
 
 4. **Start using**
-   * Open `every_entry.ipynb`.
+   * Open `EEVVEERRYYDDAAYY.ipynb`.
    * Run the cells to display the form interface.
    * Fill in your first entry and click the submit button.
 
@@ -193,13 +196,13 @@ eevveerryyddaayy/
   
 2. **Initialize project: Option 1: With Default Settings**
 
-    1. Open the `every_start.ipynb` notebook in the root directory.
+    1. Open the `start.ipynb` notebook in the `settings` directory.
     2. Run all code cells by clicking `Run All`.
     3. Skip to #4.
 
 3. **Initialize project: Option 2: With Custom Settings**
 
-    1. Open the `every_start.ipynb` notebook in the root directory.
+    1. Open the `start.ipynb` notebook in the `settings` directory.
     2. Modify the code cell containing configuration settings (see #4 for details of options):
 
         ```python
@@ -251,7 +254,7 @@ eevveerryyddaayy/
 
 1. Open the project folder on VS Code, if not already.
 
-2. Open `every_entry.ipynb` in the root directory.
+2. Open `EEVVEERRYYDDAAYY.ipynb` in the root directory.
 
 3. Execute the cell containing the python code or `Run All` to display the form interface.
 
@@ -290,7 +293,7 @@ This application primarily runs in the user's local environment using VS Code an
 
 If you need to modify your project settings after initialization:
 
-* The upcoming feature will support configuration updates through `every_update.ipynb`.
+* The upcoming feature will support configuration updates through `update.ipynb` in the `settings` directory.
 * This will allow you to change project settings without starting from scratch.
 * Currently, some settings like Index Table structure can only be set during initialization.
 
