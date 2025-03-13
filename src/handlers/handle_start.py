@@ -66,8 +66,8 @@ def _handle_start_dirs(
 
 
 def _handle_start_backup(
-    input_path: str,
-    output_path: str
+        input_path: str,
+        output_path: str
     ) -> int:
     """
     Create a backup copy of input file with .bak extension in backup directory
@@ -82,24 +82,24 @@ def _handle_start_backup(
 
 
 def _handle_start_file(
-    input_dir: str,
-    input_file: str,
-    bak_dir: str,
-    output_dir: str,
-    output_file: str
+        input_dir: str,
+        input_file: str,
+        bak_dir: str,
+        output_dir: str,
+        output_file: str
     ) -> int:
     """
     Handle file operations for VS Code settings or other configuration files.
 
     Parameters
     ----------
-    target_dir : str
+    input_dir : str
         Directory containing the target file, default is ".vscode"
-    target_file : str
+    input_file : str
         Name of the target file to be moved, default is "settings.json"
-    destination_dir : str
+    output_dir : str
         Directory where the target file will be moved, default is "assets/deprecated"
-    destination_file : str
+    output_file : str
         Name of the file at destination, default is "settings.json"
 
     Returns
@@ -108,16 +108,6 @@ def _handle_start_file(
         1 if operations successful
     """
     input_file_path = os.path.join(input_dir, input_file)
-
-    # print("\n")
-    # print(f"Input Directory: {input_dir}")
-    # print(f"Input File: {input_file}")
-    # print(f"Input File Path: {input_file_path}")
-    # print(f"Input File Exists: {os.path.exists(input_file_path)}")
-    # print(f"Backup Directory: {bak_dir}")
-    # print(f"Output Directory: {output_dir}")
-    # print(f"Output File: {output_file}")
-    # print("\n")
 
     # Step 1: Create a backup copy
     _handle_start_backup(input_file_path, bak_dir)
@@ -134,7 +124,7 @@ def _handle_start_file(
 
 
 def _handle_start_files(
-    bak_dir: str,
+        bak_dir: str,
     ) -> int:
     """
     TD
@@ -184,7 +174,7 @@ def _handle_start_files(
                        '')
 
     # api.yaml
-    _handle_start_file(os.path.join(ROOT_DIR, '.github'),
+    _handle_start_file(os.path.join(ROOT_DIR, '.github/workflows'),
                        'api.yaml',
                        bak_dir,
                        '',
@@ -431,7 +421,7 @@ def _handle_start_template(
     """
     solutions_file_path = os.path.join(ROOT_DIR,
                                        config.get("TEMPLATES_DIR"),
-                                       'solutions.txt')
+                                       'solution.txt')
 
     lines_template = []
 
