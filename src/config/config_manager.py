@@ -3,11 +3,14 @@ A configuration manager class for application settings
 """
 
 # Python Standard Library
-from typing import Dict, Any, Optional, Tuple
-import importlib.util
 from ast import literal_eval
+import importlib.util
+import os
+from typing import Dict, Any, Optional, Tuple
 
 # Local
+from .config_paths import ROOT_DIR_1
+from .config_paths import ROOT_DIR_2
 from .config_paths import CONFIG_DIR
 
 
@@ -70,11 +73,16 @@ class ConfigManager:
         """
         Load and validate constants from config.py and config_proj.py files
         """
+        config_dir_local = os.path.join(ROOT_DIR_1, CONFIG_DIR)
+
+        if not os.path.exists(config_dir_local):
+            config_dir_local = os.path.join(ROOT_DIR_2, CONFIG_DIR)
+
         config_files = [
-            f"{CONFIG_DIR}/config_proj.py",
-            f"{CONFIG_DIR}/config_index.py",
-            f"{CONFIG_DIR}/config_form.py",
-            f"{CONFIG_DIR}/config_paths.py",
+            f"{config_dir_local}/config_proj.py",
+            f"{config_dir_local}/config_index.py",
+            f"{config_dir_local}/config_form.py",
+            f"{config_dir_local}/config_paths.py",
         ]
 
         for config_file in config_files:

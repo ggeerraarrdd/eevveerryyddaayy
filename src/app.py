@@ -213,9 +213,9 @@ def eevveerryyddaayy(*args: Any, **kwargs: Any) -> Union[int, Any]:
 
     elif kwargs['source'] == 3:
         # ENTRY FORM - every_entry.ipynb - button clicked
-        package = PackageManager()
-        run_project(package, args)
-        package.reset()
+        # package = PackageManager()
+        # run_project(package, args)
+        # package.reset()
         return 1
 
     else:
