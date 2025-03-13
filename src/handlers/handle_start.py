@@ -19,7 +19,6 @@ Functions:
 
 # Python Standard Library
 from datetime import datetime
-import json  # pylint: disable=unused-import
 import os
 import shutil
 
@@ -52,9 +51,14 @@ if not os.path.exists(os.path.join(ROOT_DIR_1, 'src')):
 
 
 def _handle_start_dirs(
-    ) -> int:
+    ) -> str:
     """
-    TD
+    Create backup directory for project initialization files.
+    
+    Returns
+    -------
+    str
+        Path to the created backup directory
     """
     assets_dir = os.path.join(ROOT_DIR, 'assets')
     start_dir = os.path.join(assets_dir, 'start')
@@ -70,10 +74,22 @@ def _handle_start_backup(
         output_path: str
     ) -> int:
     """
-    Create a backup copy of input file with .bak extension in backup directory
+    Create a backup copy of specified file in backup directory.
+    
+    Parameters
+    ----------
+    input_path : str
+        Path to the file to backup
+    output_path : str
+        Directory to store the backup file
+        
+    Returns
+    -------
+    int
+        1 if backup successful
     """
     file_name = os.path.basename(input_path)
-    bak_name = f"{file_name}.bak"
+    bak_name = f'{file_name}.bak'
     bak_path = os.path.join(output_path, bak_name)
 
     shutil.copy2(input_path, bak_path)
@@ -89,18 +105,20 @@ def _handle_start_file(
         output_file: str
     ) -> int:
     """
-    Handle file operations for VS Code settings or other configuration files.
+    Handle file operations including backup, move/copy, and cleanup.
 
     Parameters
     ----------
     input_dir : str
-        Directory containing the target file, default is ".vscode"
+        Source directory containing the file
     input_file : str
-        Name of the target file to be moved, default is "settings.json"
+        Name of the file to process
+    bak_dir : str
+        Directory to store backup files
     output_dir : str
-        Directory where the target file will be moved, default is "assets/deprecated"
+        Destination directory for the file
     output_file : str
-        Name of the file at destination, default is "settings.json"
+        New name for the file at destination
 
     Returns
     -------
@@ -127,7 +145,17 @@ def _handle_start_files(
         bak_dir: str,
     ) -> int:
     """
-    TD
+    Handle all project initialization of files.
+    
+    Parameters
+    ----------
+    bak_dir : str
+        Directory to store backup files
+        
+    Returns
+    -------
+    int
+        1 if all file operations successful
     """
     # Current list of files to handle
     # -------------------------------
@@ -147,24 +175,24 @@ def _handle_start_files(
 
     # README.template.md
     _handle_start_file(ROOT_DIR,
-                        "README.template.md",
+                        'README.template.md',
                         bak_dir,
                         ROOT_DIR,
-                        "README.md")
+                        'README.md')
 
     # settings.json
     _handle_start_file(os.path.join(ROOT_DIR, '.vscode'),
-                        "settings.json",
+                        'settings.json',
                         bak_dir,
                         '',
                         '')
 
     # settings.template.json
     _handle_start_file(os.path.join(ROOT_DIR, '.vscode'),
-                        "settings.template.json",
+                        'settings.template.json',
                         bak_dir,
-                        os.path.join(ROOT_DIR, ".vscode"),
-                        "settings.json")
+                        os.path.join(ROOT_DIR, '.vscode'),
+                        'settings.json')
 
     # renovate.json
     _handle_start_file(ROOT_DIR,
@@ -238,7 +266,7 @@ def _handle_start_solutions(
         1 if directory creation successful or
         0 if directory creation failed
     """
-    solutions_dir = os.path.join(ROOT_DIR, config.get("SOLUTIONS_DIR"))
+    solutions_dir = os.path.join(ROOT_DIR, config.get('SOLUTIONS_DIR'))
 
     try:
         if not os.path.exists(solutions_dir):
@@ -249,42 +277,26 @@ def _handle_start_solutions(
         return 0
 
 
-def _handle_start_configs(
-        config: ConfigManager
+def _handle_start_configs_form(
+        config: ConfigManager,
+        file_path: str
     ) -> int:
     """
-    Update configuration files with user settings.
+    Update config_form.py with user-selected site options.
 
     Parameters
     ----------
     config : ConfigManager
-        Custom container for validating, storing and retrieving application settings
+        Configuration manager instance
+    file_path : str
+        Path to the form configuration file
 
     Returns
     -------
     int
-        1 if configuration update successful
-
-    Notes
-    -----
-    Updates the following config files:
-    - config_form.py: Options for Site field in Jupyter IPywidgets form
-    - config_index.py: Index table settings in README.md
-    - config_proj.py: Project start date and title
+        1 if update successful
     """
-    config_form_file_path = os.path.join(ROOT_DIR,
-                                         config.get('CONFIG_DIR'),
-                                         'config_form.py')
-
-    config_index_file_path = os.path.join(ROOT_DIR,
-                                         config.get('CONFIG_DIR'),
-                                         'config_index.py')
-
-    config_proj_file_path = os.path.join(ROOT_DIR,
-                                         config.get('CONFIG_DIR'),
-                                         'config_proj.py')
-
-    with open(config_form_file_path, 'r+', encoding='utf-8') as file:
+    with open(file_path, 'r+', encoding='utf-8') as file:
         lines = file.readlines()
 
         for i, line in enumerate(lines):
@@ -296,7 +308,30 @@ def _handle_start_configs(
         file.writelines(lines)
         file.truncate()
 
-    with open(config_index_file_path, 'r+', encoding='utf-8') as file:
+
+    return 1
+
+
+def _handle_start_configs_index(
+        config: ConfigManager,
+        file_path: str
+    ) -> int:
+    """
+    Update config_index.py file with user-selected settings.
+
+    Parameters
+    ----------
+    config : ConfigManager
+        Configuration manager instance
+    file_path : str
+        Path to the index configuration file
+
+    Returns
+    -------
+    int
+        1 if update successful
+    """
+    with open(file_path, 'r+', encoding='utf-8') as file:
         lines = file.readlines()
 
         for i, line in enumerate(lines):
@@ -317,7 +352,30 @@ def _handle_start_configs(
         file.writelines(lines)
         file.truncate()
 
-    with open(config_proj_file_path, 'r+', encoding='utf-8') as file:
+
+    return 1
+
+
+def _handle_start_configs_proj(
+        config: ConfigManager,
+        file_path: str
+    ) -> int:
+    """
+    Update config_proj.py file with user-selected settings.
+
+    Parameters
+    ----------
+    config : ConfigManager
+        Configuration manager instance
+    file_path : str
+        Path to the index configuration file
+
+    Returns
+    -------
+    int
+        1 if update successful
+    """
+    with open(file_path, 'r+', encoding='utf-8') as file:
         lines = file.readlines()
 
         for i, line in enumerate(lines):
@@ -333,12 +391,57 @@ def _handle_start_configs(
     return 1
 
 
+def _handle_start_configs(
+        config: ConfigManager
+    ) -> int:
+    """
+    Coordinate updates to configuration files with user-selected settings.
+
+    Parameters
+    ----------
+    config : ConfigManager
+        Configuration manager instance
+
+    Returns
+    -------
+    int
+        1 if all updates successful
+
+    Notes
+    -----
+    Updates the following config files:
+    - config_form.py: Options for Site field in Jupyter IPywidgets form
+    - config_index.py: Index table settings in README.md
+    - config_proj.py: Project title
+    """
+    # UPDATE config_form.py
+    config_form_file_path = os.path.join(ROOT_DIR,
+                                         config.get('CONFIG_DIR'),
+                                         'config_form.py')
+    _handle_start_configs_form(config, config_form_file_path)
+
+    # UPDATE config_index.py
+    config_index_file_path = os.path.join(ROOT_DIR,
+                                         config.get('CONFIG_DIR'),
+                                         'config_index.py')
+    _handle_start_configs_index(config, config_index_file_path)
+
+    # UPDATE config_proj.py
+    config_proj_file_path = os.path.join(ROOT_DIR,
+                                         config.get('CONFIG_DIR'),
+                                         'config_proj.py')
+    _handle_start_configs_proj(config, config_proj_file_path)
+
+
+    return 1
+
+
 def _handle_start_readme(
         config: ConfigManager,
         package_changes: dict
     ) -> int:
     """
-    Set up Index table in README.md and solution template files.
+    Update project title and index table settings in README.md.
 
     Parameters
     ----------
@@ -406,8 +509,7 @@ def _handle_start_template(
         package_changes: dict
     ) -> int:
     """
-    Update project title and optional sixth column settings in README.md
-    and template files.
+    Update project title and optional sixth column settings in template file.
 
     Parameters
     ----------
@@ -420,7 +522,7 @@ def _handle_start_template(
         1 if title update successful
     """
     solutions_file_path = os.path.join(ROOT_DIR,
-                                       config.get("TEMPLATES_DIR"),
+                                       config.get('TEMPLATES_DIR'),
                                        'solution.txt')
 
     lines_template = []
@@ -450,27 +552,29 @@ def handle_start(
         package_changes: dict
     ) -> int:
     """
-    Initialize project settings and update configuration files.
+    Coordinate the project initialization process.
 
     Parameters
     ----------
     config : ConfigManager
-        Custom container for validating, storing and retrieving application settings
+        Configuration manager instance
     package_changes : dict
         Dictionary of configuration changes to apply
 
     Returns
     -------
     int
-        1 if initialization successful
+        1 if all initialization steps successful
 
     Notes
     -----
-    Main entry point for project setup that coordinates:
+    Manages all aspects of project setup including:
+    - Creating backup directories
+    - Processing initialization files
     - Setting project start date
-    - Updating configuration files
-    - Setting up Index table in README.md
-    - Configuring template files
+    - Creating solutions directory
+    - Updating all configuration files
+    - Modifying README and template files
     """
     # HANDLE BACKUP DIR
     bak_dir = _handle_start_dirs()
