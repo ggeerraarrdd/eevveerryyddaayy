@@ -48,6 +48,8 @@ from .config_index import NB_NAME
 from .config_index import SEQ_NOTATION
 from .config_index import SEQ_SPARSE
 from .config_index import COLS_WIDTH
+from .config_paths import ROOT_DIR_1
+from .config_paths import ROOT_DIR_2
 from .config_paths import SOLUTIONS_DIR
 from .config_paths import CONFIG_DIR
 from .config_paths import TEMPLATES_DIR
@@ -62,6 +64,8 @@ __all__ = [
     'SEQ_NOTATION',
     'SEQ_SPARSE',
     'COLS_WIDTH',
+    'ROOT_DIR_1',
+    'ROOT_DIR_2',
     'SOLUTIONS_DIR',
     'CONFIG_DIR',
     'TEMPLATES_DIR',

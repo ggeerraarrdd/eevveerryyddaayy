@@ -27,6 +27,8 @@ import shutil
 
 # Local
 from src.config import ConfigManager
+from src.config import ROOT_DIR_1
+from src.config import ROOT_DIR_2
 from src.utils import HYPHEN
 from src.utils import INDEX_START
 from src.utils import INDEX_END
@@ -35,16 +37,56 @@ from src.utils import INDEX_END
 
 
 
+ROOT_DIR = ROOT_DIR_1
+
+if not os.path.exists(os.path.join(ROOT_DIR_1, 'src')):
+    ROOT_DIR = ROOT_DIR_2
 
 
 
 
 
-def _handle_start_files(
-    target_dir: str,
-    target_file: str,
-    destination_dir: str,
-    destination_file: str
+
+
+
+
+
+def _handle_start_dirs(
+    ) -> int:
+    """
+    TD
+    """
+    assets_dir = os.path.join(ROOT_DIR, 'assets')
+    start_dir = os.path.join(assets_dir, 'start')
+    bak_dir = os.path.join(start_dir, f'{datetime.now().strftime("%Y-%m-%d")}_start_bak')
+
+    os.makedirs(bak_dir, exist_ok=True)
+
+    return bak_dir
+
+
+def _handle_start_backup(
+    input_path: str,
+    output_path: str
+    ) -> int:
+    """
+    Create a backup copy of input file with .bak extension in backup directory
+    """
+    file_name = os.path.basename(input_path)
+    bak_name = f"{file_name}.bak"
+    bak_path = os.path.join(output_path, bak_name)
+
+    shutil.copy2(input_path, bak_path)
+
+    return 1
+
+
+def _handle_start_file(
+    input_dir: str,
+    input_file: str,
+    bak_dir: str,
+    output_dir: str,
+    output_file: str
     ) -> int:
     """
     Handle file operations for VS Code settings or other configuration files.
@@ -65,30 +107,89 @@ def _handle_start_files(
     int
         1 if operations successful
     """
-    template_file = f"{os.path.splitext(target_file)[0]}.template{os.path.splitext(target_file)[1]}"
+    input_file_path = os.path.join(input_dir, input_file)
 
-    target_path = os.path.join(target_dir, target_file)
-    template_path = os.path.join(target_dir, template_file)
-    destination_path = os.path.join(destination_dir, destination_file)
+    # print("\n")
+    # print(f"Input Directory: {input_dir}")
+    # print(f"Input File: {input_file}")
+    # print(f"Input File Path: {input_file_path}")
+    # print(f"Input File Exists: {os.path.exists(input_file_path)}")
+    # print(f"Backup Directory: {bak_dir}")
+    # print(f"Output Directory: {output_dir}")
+    # print(f"Output File: {output_file}")
+    # print("\n")
 
-    # Ensure destination directory exists
-    if not os.path.exists(destination_dir):
-        os.makedirs(destination_dir)
+    # Step 1: Create a backup copy
+    _handle_start_backup(input_file_path, bak_dir)
 
-    # Step 1: Check if target file exists and move it
-    if os.path.exists(target_path):
-        # If file already at destination, create backup
-        if os.path.exists(destination_path):
-            backup_path = os.path.join(destination_dir, f"{destination_file}.bak")
-            shutil.move(destination_path, backup_path)
+    # Step 2: Move files (or rename files if already at destination dir)
+    if output_dir and output_file:
+        shutil.copy(input_file_path, os.path.join(output_dir, output_file))
 
-        # Move target file to destination
-        shutil.move(target_path, destination_path)
+    # Step 3: Remove file
+    os.remove(input_file_path)
 
-    # Step 2: Check if template file exists and copy to target location
-    if os.path.exists(template_path):
-        shutil.copy(template_path, target_path)
-        os.remove(template_path)
+
+    return 1
+
+
+def _handle_start_files(
+    bak_dir: str,
+    ) -> int:
+    """
+    TD
+    """
+    # Current list of files to handle
+    # -------------------------------
+    # README.md
+    # README.template.md
+    # settings.json
+    # settings.template.json
+    # renovate.json
+    # api.yaml
+
+    # README.md
+    _handle_start_file(ROOT_DIR,
+                        'README.md',
+                        bak_dir,
+                        os.path.join(ROOT_DIR, 'docs'),
+                        'README.md')
+
+    # README.template.md
+    _handle_start_file(ROOT_DIR,
+                        "README.template.md",
+                        bak_dir,
+                        ROOT_DIR,
+                        "README.md")
+
+    # settings.json
+    _handle_start_file(os.path.join(ROOT_DIR, '.vscode'),
+                        "settings.json",
+                        bak_dir,
+                        '',
+                        '')
+
+    # settings.template.json
+    _handle_start_file(os.path.join(ROOT_DIR, '.vscode'),
+                        "settings.template.json",
+                        bak_dir,
+                        os.path.join(ROOT_DIR, ".vscode"),
+                        "settings.json")
+
+    # renovate.json
+    _handle_start_file(ROOT_DIR,
+                       'renovate.json',
+                       bak_dir,
+                       '',
+                       '')
+
+    # api.yaml
+    _handle_start_file(os.path.join(ROOT_DIR, '.github'),
+                       'api.yaml',
+                       bak_dir,
+                       '',
+                       '')
+
 
     return 1
 
@@ -111,7 +212,9 @@ def _handle_start_date(
     """
     today = datetime.now().strftime(f'%Y{HYPHEN}%m{HYPHEN}%d')
 
-    with open(f"{config.get('CONFIG_DIR')}/config_proj.py", 'r+', encoding='utf-8') as file:
+    config_proj_file_path = os.path.join(ROOT_DIR, config.get('CONFIG_DIR'), 'config_proj.py')
+
+    with open(config_proj_file_path, 'r+', encoding='utf-8') as file:
         lines = file.readlines()
 
         for i, line in enumerate(lines):
@@ -145,7 +248,7 @@ def _handle_start_solutions(
         1 if directory creation successful or
         0 if directory creation failed
     """
-    solutions_dir = config.get("SOLUTIONS_DIR")
+    solutions_dir = os.path.join(ROOT_DIR, config.get("SOLUTIONS_DIR"))
 
     try:
         if not os.path.exists(solutions_dir):
@@ -179,7 +282,19 @@ def _handle_start_configs(
     - config_index.py: Index table settings in README.md
     - config_proj.py: Project start date and title
     """
-    with open(f"{config.get('CONFIG_DIR')}/config_form.py", 'r+', encoding='utf-8') as file:
+    config_form_file_path = os.path.join(ROOT_DIR,
+                                         config.get('CONFIG_DIR'),
+                                         'config_form.py')
+
+    config_index_file_path = os.path.join(ROOT_DIR,
+                                         config.get('CONFIG_DIR'),
+                                         'config_index.py')
+
+    config_proj_file_path = os.path.join(ROOT_DIR,
+                                         config.get('CONFIG_DIR'),
+                                         'config_proj.py')
+
+    with open(config_form_file_path, 'r+', encoding='utf-8') as file:
         lines = file.readlines()
 
         for i, line in enumerate(lines):
@@ -191,7 +306,7 @@ def _handle_start_configs(
         file.writelines(lines)
         file.truncate()
 
-    with open(f"{config.get('CONFIG_DIR')}/config_index.py", 'r+', encoding='utf-8') as file:
+    with open(config_index_file_path, 'r+', encoding='utf-8') as file:
         lines = file.readlines()
 
         for i, line in enumerate(lines):
@@ -212,7 +327,7 @@ def _handle_start_configs(
         file.writelines(lines)
         file.truncate()
 
-    with open(f"{config.get('CONFIG_DIR')}/config_proj.py", 'r+', encoding='utf-8') as file:
+    with open(config_proj_file_path, 'r+', encoding='utf-8') as file:
         lines = file.readlines()
 
         for i, line in enumerate(lines):
@@ -250,6 +365,8 @@ def _handle_start_readme(
     Updates both README.md index table and solution template files
     with the configured notebook column name
     """
+    readme_file_path = os.path.join(ROOT_DIR, 'README.md')
+
     nb_name = config.get('NB_NAME')
 
     index_header = {
@@ -261,7 +378,7 @@ def _handle_start_readme(
     end_line_readme = None
     lines_readme = []
 
-    with open('README.md', 'r+', encoding='utf-8') as file:
+    with open(readme_file_path, 'r+', encoding='utf-8') as file:
         lines_readme = file.readlines()
 
         # HANDLE README CHANGES - TITLE
@@ -312,9 +429,13 @@ def _handle_start_template(
     int
         1 if title update successful
     """
+    solutions_file_path = os.path.join(ROOT_DIR,
+                                       config.get("TEMPLATES_DIR"),
+                                       'solutions.txt')
+
     lines_template = []
 
-    with open(f'{config.get("TEMPLATES_DIR")}/solution.txt', 'r+', encoding='utf-8') as file:
+    with open(solutions_file_path, 'r+', encoding='utf-8') as file:
         lines_template = file.readlines()
 
         # HANDLE TEMPLATE CHANGES - TITLE
@@ -361,29 +482,29 @@ def handle_start(
     - Setting up Index table in README.md
     - Configuring template files
     """
-    # HANDLE README.TEMPLATE.MD
-    _handle_start_files(".", "README.md", "assets/deprecated", "README.md")
+    # HANDLE BACKUP DIR
+    bak_dir = _handle_start_dirs()
 
-    # HANDLE SETTINGS.TEMPLATE.JSON
-    _handle_start_files(".vscode", "settings.json", "assets/deprecated", "settings.json")
+    # HANDLE FILES
+    _handle_start_files(bak_dir)
 
-    # UPDATE PROJECT START DATE
+    # HANDLE PROJECT START DATE
     _handle_start_date(config)
 
-    # CREATE SOLUTIONS DIRECTORY
+    # HANDLE SOLUTIONS DIRECTORY
     _handle_start_solutions(config)
 
     if len(package_changes) > 0:
         # print(json.dumps(package_changes, indent=4))
 
-        # UPDATE CONFIG FILES
+        # HANDLE CONFIG FILES
         _handle_start_configs(config)
 
         if 'PROJ_TITLE' in package_changes.keys() or 'NB' in package_changes.keys():
-            # UPDATE README
+            # HANDLE README
             _handle_start_readme(config, package_changes)
 
-            # UPDATE TEMPLATE FILE
+            # HANDLE TEMPLATE FILE
             _handle_start_template(config, package_changes)
 
     return 1
