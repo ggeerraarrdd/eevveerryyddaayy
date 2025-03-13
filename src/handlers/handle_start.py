@@ -536,7 +536,7 @@ def _handle_start_template(
 
         # HANDLE TEMPLATE CHANGES - NB
         if 'NB' in package_changes.keys() and 'NB_NAME' in package_changes.keys():
-            lines_template[29] = f'## {config.get('NB_NAME')}\n'
+            lines_template[29] = f'## {config.get("NB_NAME")}\n'
             lines_template[32] = '\n'
 
         file.seek(0)
