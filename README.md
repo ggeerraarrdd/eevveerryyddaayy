@@ -47,6 +47,10 @@ _eevveerryyddaayy_ automates many of the tedious manual work associated with the
 
 <https://github.com/user-attachments/assets/70bc8cad-084e-400a-b0f7-446319ef54af>
 
+<!-- markdownlint-disable MD036 -->
+_(SQL Everyday, an eevveerryyddaayy project. Scroll animation video created using [Portfoliofy](https://github.com/ggeerraarrdd/portfoliofy).)_
+<!-- markdownlint-enable MD036 -->
+
 ## Target Users
 
 _eevveerryyddaayy_ is intended for **self-directed learners**, such as:
@@ -334,4 +338,4 @@ If you need to modify your project settings after initialization:
 
 ## Frontispiece
 
-Buddy Holly and The Crickets performing "That'll Be The Day" [Still from broadcast]. The Ed Sullivan Show. CBS, December 1, 1957.
+* TBD
