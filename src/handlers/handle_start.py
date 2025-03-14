@@ -438,7 +438,8 @@ def _handle_start_configs(
 
 def _handle_start_readme(
         config: ConfigManager,
-        package_changes: dict
+        package_changes: dict,
+        root_dir: str = ROOT_DIR
     ) -> int:
     """
     Update project title and index table settings in README.md.
@@ -458,7 +459,7 @@ def _handle_start_readme(
     Updates both README.md index table and solution template files
     with the configured notebook column name
     """
-    readme_file_path = os.path.join(ROOT_DIR, 'README.md')
+    readme_file_path = os.path.join(root_dir, 'README.md')
 
     nb_name = config.get('NB_NAME')
 
