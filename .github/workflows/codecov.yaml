@@ -1,11 +1,11 @@
-name: API workflow
+name: SRC workflow
 
 on: [push, pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Test python API
+    name: codecov coverage
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-python@v5
