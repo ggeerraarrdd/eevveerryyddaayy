@@ -22,6 +22,7 @@ handle_start
 """
 
 import os
+import stat
 
 from src.handlers.handle_start import _handle_start_backup
 
@@ -41,7 +42,7 @@ def test_handle_start_backup_preserves_metadata(tmpdir):
     # Create test file with specific permissions
     test_file = tmpdir.join("test.txt")
     test_file.write("test content")
-    os.chmod(str(test_file), 0o644)
+    os.chmod(str(test_file), stat.S_IRWXU)
 
     # Get original metadata
     orig_stat = os.stat(str(test_file))
