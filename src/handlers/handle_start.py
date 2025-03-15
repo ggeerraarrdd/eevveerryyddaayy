@@ -507,7 +507,8 @@ def _handle_start_readme(
 
 def _handle_start_template(
         config : ConfigManager,
-        package_changes: dict
+        package_changes: dict,
+        root_dir: str = ROOT_DIR
     ) -> int:
     """
     Update project title and optional sixth column settings in template file.
@@ -522,7 +523,7 @@ def _handle_start_template(
     int
         1 if title update successful
     """
-    solutions_file_path = os.path.join(ROOT_DIR,
+    solutions_file_path = os.path.join(root_dir,
                                        config.get('TEMPLATES_DIR'),
                                        'solution.txt')
 
