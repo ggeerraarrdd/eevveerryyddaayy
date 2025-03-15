@@ -39,8 +39,8 @@ from src.handlers.handle_start import _handle_start_configs_index
 
 
 
-def test_handle_start_configs_index_default():
-    """Test _handle_start_configs_index functionality"""
+def test_handle_start_configs_index():
+    """Test _handle_start_configs_index functionality for both default and updated values"""
     # Set up temporary directory and file
     with tempfile.TemporaryDirectory() as temp_dir:
         # Create temporary config index file
@@ -56,77 +56,43 @@ def test_handle_start_configs_index_default():
         with open(index_path, 'w', encoding='utf-8') as f:
             f.writelines(initial_content)
 
-        # Initialize config with new values
-        config = ConfigManager()
-        config.config = {
-            'NB': 0,
-            'NB_NAME': 'old_name',
-            'SEQ_NOTATION': 0,
-            'SEQ_SPARSE': 0
-        }
-
         try:
-            # Call function
-            result = _handle_start_configs_index(config, index_path)
+            # Test case 1: Default values (no changes)
+            config = ConfigManager()
+            config.config = {
+                'NB': 0,
+                'NB_NAME': 'old_name',
+                'SEQ_NOTATION': 0,
+                'SEQ_SPARSE': 0
+            }
 
-            # Verify return value
+            result = _handle_start_configs_index(config, index_path)
             assert result == 1
 
-            # Read file after function call
             with open(index_path, 'r', encoding='utf-8') as f:
                 final_content = f.readlines()
-
             assert final_content == initial_content
 
-        finally:
-            pass
+            # Test case 2: All values updated
+            config.config = {
+                'NB': 1,
+                'NB_NAME': 'new_name',
+                'SEQ_NOTATION': 1,
+                'SEQ_SPARSE': 1
+            }
 
-
-def test_handle_start_configs_index_all():
-    """Test _handle_start_configs_index functionality"""
-    # Set up temporary directory and file
-    with tempfile.TemporaryDirectory() as temp_dir:
-        # Create temporary config index file
-        index_path = os.path.join(temp_dir, 'config_index.py')
-
-        initial_content = [
-            "NB=0\n",
-            "NB_NAME='old_name'\n", 
-            "SEQ_NOTATION=0\n",
-            "SEQ_SPARSE=0\n"
-        ]
-
-        with open(index_path, 'w', encoding='utf-8') as f:
-            f.writelines(initial_content)
-
-        # Initialize config with new values
-        config = ConfigManager()
-        config.config = {
-            'NB': 1,
-            'NB_NAME': 'new_name',
-            'SEQ_NOTATION': 1,
-            'SEQ_SPARSE': 1
-        }
-
-        try:
-            # Call function
             result = _handle_start_configs_index(config, index_path)
-
-            # Verify return value
             assert result == 1
 
-            # Read file after function call
             with open(index_path, 'r', encoding='utf-8') as f:
                 final_content = f.readlines()
 
-            # Verify content was updated with new values
             expected_content = [
                 "NB=1\n",
                 "NB_NAME='new_name'\n",
                 "SEQ_NOTATION=1\n",
                 "SEQ_SPARSE=1\n",
             ]
-
             assert final_content == expected_content
 
         finally:
