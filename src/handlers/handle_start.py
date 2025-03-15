@@ -392,7 +392,8 @@ def _handle_start_configs_proj(
 
 
 def _handle_start_configs(
-        config: ConfigManager
+        config: ConfigManager,
+        root_dir: str = ROOT_DIR
     ) -> int:
     """
     Coordinate updates to configuration files with user-selected settings.
@@ -415,19 +416,19 @@ def _handle_start_configs(
     - config_proj.py: Project title
     """
     # UPDATE config_form.py
-    config_form_file_path = os.path.join(ROOT_DIR,
+    config_form_file_path = os.path.join(root_dir,
                                          config.get('CONFIG_DIR'),
                                          'config_form.py')
     _handle_start_configs_form(config, config_form_file_path)
 
     # UPDATE config_index.py
-    config_index_file_path = os.path.join(ROOT_DIR,
+    config_index_file_path = os.path.join(root_dir,
                                          config.get('CONFIG_DIR'),
                                          'config_index.py')
     _handle_start_configs_index(config, config_index_file_path)
 
     # UPDATE config_proj.py
-    config_proj_file_path = os.path.join(ROOT_DIR,
+    config_proj_file_path = os.path.join(root_dir,
                                          config.get('CONFIG_DIR'),
                                          'config_proj.py')
     _handle_start_configs_proj(config, config_proj_file_path)
