@@ -52,115 +52,184 @@ from src.utils import get_target_line_updated
 
 
 
+def _handle_runs_prep_seq_files(
+        today: datetime,
+        file_last: str,
+        seq_notation_loc: int,
+        seq_start_loc: str,
+        hyphen: str = HYPHEN
+    ) -> Tuple[str, str, Optional[Union[int, datetime.date]], Union[int, datetime.date]]:
+    """
+    Generate sequence when files exist in the directory.
+
+    Parameters
+    ----------
+    today : datetime
+        Current timestamp for sequence generation
+    file_last : str
+        Name of last file in directory
+    seq_notation_loc : int
+        Sequence notation type (0 for numeric, 1 for date-based)
+    seq_start_loc : str
+        Project start date for sequence calculation
+    hyphen : str, optional
+        Hyphen character to use in date formatting, by default HYPHEN
+
+    Returns
+    -------
+    str
+        Full sequence ID with suffix (e.g. "001_01" or "2025‑01‑31_01")
+    str
+        Main sequence part (e.g. "001" or "2025‑01‑31")
+    Optional[Union[int, datetime.date]]
+        Previous sequence number or date
+    Union[int, datetime.date]
+        Current sequence number or date
+
+    Raises
+    ------
+    ValueError
+        If seq_notation_loc is invalid
+    """
+    seq_next_full_str = ''
+
+    # Handle sequence partials (main and suffix)
+    if seq_notation_loc == 0:
+        seq_last_main = int(file_last[:3])
+        seq_last_suffix = int(file_last[4:6])
+
+        seq_next_main = datetime.strptime(seq_start_loc, f'%Y{hyphen}%m{hyphen}%d').date()
+        seq_next_main = (today.date() - seq_next_main).days + 1
+        seq_next_main_str = f'{seq_next_main:03d}'
+
+    elif seq_notation_loc == 1:
+        seq_last_main = datetime.strptime(file_last[:10], f'%Y{hyphen}%m{hyphen}%d').date()
+        seq_last_suffix = int(file_last[11:13])
+
+        seq_next_main = datetime.now().date()
+        seq_next_main_str = seq_next_main.strftime(f'%Y{hyphen}%m{hyphen}%d')
+
+    else:
+        raise ValueError('Invalid configuration: TODO')
+
+    # Handle full sequence
+    if seq_last_main == seq_next_main:
+        seq_next_suffix = seq_last_suffix + 1
+        seq_next_suffix_str = f'{seq_next_suffix:02d}'
+        seq_next_full_str = f'{seq_next_main_str}_{seq_next_suffix_str}'
+        print('Note: You have submitted more than 1 entry today.')
+
+    elif seq_last_main < seq_next_main:
+        seq_next_suffix_str = '01'
+        seq_next_full_str = f'{seq_next_main_str}_{seq_next_suffix_str}'
+
+    else:
+        print('Note: Invalid sequence. Processing not terminated.')
+
+    return seq_next_full_str, seq_next_main_str, seq_last_main, seq_next_main
+
+
+def _handle_runs_prep_seq_no_files(
+        today: datetime,
+        seq_notation_loc: int
+    ) -> Tuple[str, str, Optional[Union[int, datetime.date]], Union[int, datetime.date]]:
+    """
+    Generate sequence when no files exist in the directory.
+
+    Parameters
+    ----------
+    today : datetime
+        Current timestamp for sequence generation
+    seq_notation_loc : int
+        Sequence notation type (0 for numeric, 1 for date-based)
+
+    Returns
+    -------
+    str
+        Full sequence ID with suffix (e.g. "001_01" or "2025‑01‑31_01")
+    str
+        Main sequence part (e.g. "001" or "2025‑01‑31")
+    Optional[Union[int, datetime.date]]
+        Previous sequence number or date (None for first entry)
+    Union[int, datetime.date]
+        Current sequence number or date (None for first entry)
+
+    Raises
+    ------
+    ValueError
+        If seq_notation_loc is not 0 or 1
+    """
+    if seq_notation_loc == 0:
+
+        seq_last_main = None
+        seq_next_main = None
+
+        seq_next_main_str = '001'
+        seq_next_suffix_str = '01'
+        seq_next_full_str = f'{seq_next_main_str}_{seq_next_suffix_str}'
+
+    elif seq_notation_loc == 1:
+
+        seq_last_main = None
+        seq_next_main = None
+
+        seq_next_main_str = today.strftime(f'%Y{HYPHEN}%m{HYPHEN}%d')
+        seq_next_suffix_str = '01'
+        seq_next_full_str = f'{seq_next_main_str}_{seq_next_suffix_str}'
+
+    else:
+
+        raise ValueError('Invalid configuration: Expected 0 or 1.')
+
+    return seq_next_full_str, seq_next_main_str, seq_last_main, seq_next_main
+
+
 def _handle_runs_prep_seq(
         config: ConfigManager,
         today: datetime
     ) -> Tuple[str, str, Optional[Union[int, datetime.date]], Union[int, datetime.date]]:
     """
-    Generate a sequence identifier for each entry in the Index table and solution filename prefix.
-    
+    Generate sequence identifier for Index table entries and solution filenames.
+
     Parameters
     ----------
     config : ConfigManager
-        Custom container for validating, storing and retrieving application settings
+        Configuration manager containing application settings
     today : datetime
         Current timestamp for sequence generation
-    
+
     Returns
     -------
-    seq_next_full_str : str
+    str
         Full sequence ID with suffix (e.g. "001_01" or "2025‑01‑31_01")
-    seq_next_main_str : str
+    str
         Main sequence part (e.g. "001" or "2025‑01‑31")
-    seq_last_main : Optional[Union[int, datetime.date]]
+    Optional[Union[int, datetime.date]]
         Previous sequence number or date (None if first entry)
-    seq_next_main : Union[int, datetime.date]
+    Union[int, datetime.date]
         Current sequence number or date
-        
+
     Raises
     ------
     ValueError
-        If seq_notation_loc is not 0 or 1
-        
+        If seq_notation_loc configuration is not 0 or 1
+
     Notes
     -----
-    Uses seq_notation_loc to determine sequence format:
+    Sequence format is determined by seq_notation_loc:
     - 0: Three digit sequence (e.g. "001")
-    - 1: Date format using Unicode non-breaking hyphens U+2011 (e.g. "2025‑01‑31")
+    - 1: Date format with Unicode non-breaking hyphens U+2011 (e.g. "2025‑01‑31")
     """
     seq_start_loc = config.get('PROJ_START')
     seq_notation_loc = config.get('SEQ_NOTATION')
-    seq_next_full_str = ''
 
     with os.scandir(config.get('SOLUTIONS_DIR')) as entries:
         files = sorted(entry.name for entry in entries)
 
     if files:
+        return _handle_runs_prep_seq_files(today, files[-1], seq_notation_loc, seq_start_loc)
 
-        file_last = files[-1]
-
-        # Handle sequence partials (main and suffix)
-        if seq_notation_loc == 0:
-
-            seq_last_main = int(file_last[:3])
-            seq_last_suffix = int(file_last[4:6])
-
-            seq_next_main = datetime.strptime(seq_start_loc, f'%Y{HYPHEN}%m{HYPHEN}%d').date()
-            seq_next_main = (today.date() - seq_next_main).days + 1
-            seq_next_main_str = f'{seq_next_main:03d}'
-
-        elif seq_notation_loc == 1:
-
-            seq_last_main = datetime.strptime(file_last[:10], f'%Y{HYPHEN}%m{HYPHEN}%d').date()
-            seq_last_suffix = int(file_last[11:13])
-
-            seq_next_main = datetime.now().date()
-            seq_next_main_str = seq_next_main.strftime(f'%Y{HYPHEN}%m{HYPHEN}%d')
-
-        else:
-            raise ValueError('Invalid configuration: TODO')
-
-        # Handle full sequence
-        if seq_last_main == seq_next_main:
-
-            seq_next_suffix = seq_last_suffix + 1
-            seq_next_suffix_str = f'{seq_next_suffix:02d}'
-            seq_next_full_str = f'{seq_next_main_str}_{seq_next_suffix_str}'
-            print('Note: You have submitted more than 1 entry today.')
-
-        elif seq_last_main < seq_next_main:
-
-            seq_next_suffix_str = '01'
-            seq_next_full_str = f'{seq_next_main_str}_{seq_next_suffix_str}'
-
-        else:
-            print('Note: Invalid sequence. Processing not terminated.')
-
-    else:
-
-        if seq_notation_loc == 0:
-
-            seq_last_main = None
-            seq_next_main = None
-
-            seq_next_main_str = '001'
-            seq_next_suffix_str = '01'
-            seq_next_full_str = f'{seq_next_main_str}_{seq_next_suffix_str}'
-
-        elif seq_notation_loc == 1:
-
-            seq_last_main = None
-            seq_next_main = None
-
-            seq_next_main_str = today.strftime(f'%Y{HYPHEN}%m{HYPHEN}%d')
-            seq_next_suffix_str = '01'
-            seq_next_full_str = f'{seq_next_main_str}_{seq_next_suffix_str}'
-
-        else:
-            raise ValueError('Invalid configuration: TODO')
-
-
-    return seq_next_full_str, seq_next_main_str, seq_last_main, seq_next_main
+    return _handle_runs_prep_seq_no_files(today, seq_notation_loc)
 
 
 def _handle_runs_prep_file(
