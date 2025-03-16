@@ -42,9 +42,10 @@ def test_handle_runs_prep_seq_empty_dir():
 
 def test_handle_runs_prep_seq_nonempty_dir():
     """Test sequence generation with existing files"""
+    hyphen = '\u2011'
     mock_config = Mock()
     mock_config.get.side_effect = {
-        'PROJ_START': '2025-03-14',
+        'PROJ_START': f'2025{hyphen}03{hyphen}14',
         'SEQ_NOTATION': 0,
         'SOLUTIONS_DIR': '/fake/path'
     }.get
@@ -71,9 +72,10 @@ def test_handle_runs_prep_seq_nonempty_dir():
 
 def test_handle_runs_prep_seq_calls_correct_function():
     """Test that the correct sequence function is called based on directory state"""
+    hyphen = '\u2011'
     mock_config = Mock()
     mock_config.get.side_effect = {
-        'PROJ_START': '2025-03-14',
+        'PROJ_START': f'2025{hyphen}03{hyphen}14',
         'SEQ_NOTATION': 0,
         'SOLUTIONS_DIR': '/fake/path'
     }.get
@@ -85,21 +87,21 @@ def test_handle_runs_prep_seq_calls_correct_function():
     with patch('os.scandir') as mock_scandir, \
          patch('src.handlers.handle_runs._handle_runs_prep_seq_files') as mock_prep_files, \
          patch('src.handlers.handle_runs._handle_runs_prep_seq_no_files') as mock_prep_no_files:
-        
+
         # Test with files present
         mock_scandir.return_value.__enter__.return_value = [mock_file]
         _handle_runs_prep_seq(mock_config, test_date)
-        
+
         mock_prep_files.assert_called_once()
         mock_prep_no_files.assert_not_called()
-        
+
         # Reset mocks
         mock_prep_files.reset_mock()
         mock_prep_no_files.reset_mock()
-        
+
         # Test with empty directory
         mock_scandir.return_value.__enter__.return_value = []
         _handle_runs_prep_seq(mock_config, test_date)
-        
+
         mock_prep_files.assert_not_called()
         mock_prep_no_files.assert_called_once()
