@@ -15,7 +15,8 @@ from src.handlers.handle_runs import _handle_runs_prep_seq_no_files
 
 
 
-def test_sequence_generation_for_empty_directory():
+
+def test_handle_runs_prep_seq_no_files():
     """Test sequence generation for empty directory"""
     today = datetime(2025, 3, 15)
     hyphen = '\u2011'
@@ -34,7 +35,7 @@ def test_sequence_generation_for_empty_directory():
     assert result[2] is None                            # last main should be None
     assert result[3] is None                            # next main should be None
 
-    # Act & Assert - Invalid notation
+    # Invalid notation
     with pytest.raises(ValueError) as exc_info:
         _handle_runs_prep_seq_no_files(today, 2, hyphen)
     assert str(exc_info.value) == 'Invalid configuration: Expected 0 or 1.'
