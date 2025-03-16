@@ -131,7 +131,8 @@ def _handle_runs_prep_seq_files(
 
 def _handle_runs_prep_seq_no_files(
         today: datetime,
-        seq_notation_loc: int
+        seq_notation_loc: int,
+        hyphen: str = HYPHEN
     ) -> Tuple[str, str, Optional[Union[int, datetime.date]], Union[int, datetime.date]]:
     """
     Generate sequence when no files exist in the directory.
@@ -159,10 +160,10 @@ def _handle_runs_prep_seq_no_files(
     ValueError
         If seq_notation_loc is not 0 or 1
     """
-    if seq_notation_loc == 0:
+    seq_last_main = None
+    seq_next_main = None
 
-        seq_last_main = None
-        seq_next_main = None
+    if seq_notation_loc == 0:
 
         seq_next_main_str = '001'
         seq_next_suffix_str = '01'
@@ -170,10 +171,7 @@ def _handle_runs_prep_seq_no_files(
 
     elif seq_notation_loc == 1:
 
-        seq_last_main = None
-        seq_next_main = None
-
-        seq_next_main_str = today.strftime(f'%Y{HYPHEN}%m{HYPHEN}%d')
+        seq_next_main_str = today.strftime(f'%Y{hyphen}%m{hyphen}%d')
         seq_next_suffix_str = '01'
         seq_next_full_str = f'{seq_next_main_str}_{seq_next_suffix_str}'
 
