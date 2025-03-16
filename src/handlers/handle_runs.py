@@ -106,7 +106,7 @@ def _handle_runs_prep_seq_files(
         seq_last_main = datetime.strptime(file_last[:10], f'%Y{hyphen}%m{hyphen}%d').date()
         seq_last_suffix = int(file_last[11:13])
 
-        seq_next_main = datetime.now().date()
+        seq_next_main = today.date()
         seq_next_main_str = seq_next_main.strftime(f'%Y{hyphen}%m{hyphen}%d')
 
     else:
