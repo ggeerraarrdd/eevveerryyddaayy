@@ -1,29 +1,33 @@
 """
 Integration tests for start handlers module in project initialization
 
-------------------------------------------------------
-Name                            Unit    Integ   Func
-------------------------------------------------------
-_handle_start_dirs
-_handle_start_backup
-_handle_start_file              
-_handle_start_files             X
-_handle_start_date
-_handle_start_solutions
-_handle_start_configs_form
-_handle_start_configs_index
-_handle_start_configs_proj
-_handle_start_configs
-_handle_start_readme
-_handle_start_template
-handle_start
-------------------------------------------------------
-./src/utils/utils_constants.py  X
-------------------------------------------------------
+
+| START HANDLERS                     | Unit  | Integ | Func  |
+| ---------------------------------- | ----- | ----- | ----- |
+| _handle_start_dirs                 |       |       |       |
+| _handle_start_backup               |       |   x   |       |
+| _handle_start_file                 |       |       |       |
+| _handle_start_files                |       |       |       |
+| _handle_start_date                 |       |       |       |
+| _handle_start_solutions            |       |       |       |
+| _handle_start_configs_form         |       |       |       |
+| _handle_start_configs_index        |       |       |       |
+| _handle_start_configs_proj         |       |       |       |
+| _handle_start_configs              |       |       |       |
+| _handle_start_readme               |       |       |       |
+| _handle_start_template             |       |       |       |
+| handle_start                       |       |       |       |
+| ---------------------------------- | ----- | ----- | ----- |
+| OTHERS                             | Unit  | Integ | Func  |
+| ---------------------------------- | ----- | ----- | ----- |
+| ./src/utils/utils_constants.py     |       |   x   |       | 
+| ---------------------------------- | ----- | ----- | ----- |
 """
 
+# Python Standard Library
 from datetime import datetime
 
+# Local
 from src.utils import HYPHEN
 from src.handlers.handle_start import _handle_start_date
 

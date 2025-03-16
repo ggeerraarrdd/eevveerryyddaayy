@@ -1,32 +1,34 @@
 """
 Unit tests for start handlers module in project initialization
 
----------------------------------- | ---- | ----- | ---- |
-START HANDLERS                     | Unit | Integ | Func |
----------------------------------- | ---- | ----- | ---- |
-_handle_start_dirs                 |      |       |      |
-_handle_start_backup               |      |       |      |
-_handle_start_file                 |      |       |      |
-_handle_start_files                |      |       |      |
-_handle_start_date                 |      |       |      |
-_handle_start_solutions            |      |       |      |
-_handle_start_configs_form         |      |       |      |
-_handle_start_configs_index        | X    |       |      |
-_handle_start_configs_proj         |      |       |      |
-_handle_start_configs              |      |       |      |
-_handle_start_readme               |      |       |      |
-_handle_start_template             |      |       |      |
-handle_start                       |      |       |      |
----------------------------------- | ---- | ----- | ---- |
-OTHERS                             |      |       |      |
----------------------------------- | ---- | ----- | ---- |
----------------------------------- | ---- | ----- | ---- |
+
+| START HANDLERS                     | Unit  | Integ | Func  |
+| ---------------------------------- | ----- | ----- | ----- |
+| _handle_start_dirs                 |       |       |       |
+| _handle_start_backup               |       |       |       |
+| _handle_start_file                 |       |       |       |
+| _handle_start_files                |       |       |       |
+| _handle_start_date                 |       |       |       |
+| _handle_start_solutions            |       |       |       |
+| _handle_start_configs_form         |       |       |       |
+| _handle_start_configs_index        |   x   |       |       |
+| _handle_start_configs_proj         |       |       |       |
+| _handle_start_configs              |       |       |       |
+| _handle_start_readme               |       |       |       |
+| _handle_start_template             |       |       |       |
+| handle_start                       |       |       |       |
+| ---------------------------------- | ----- | ----- | ----- |
+| OTHERS                             | Unit  | Integ | Func  |
+| ---------------------------------- | ----- | ----- | ----- |
+| ---------------------------------- | ----- | ----- | ----- |
 """
 
+# Python Standard Library
 import os
 import tempfile
 from unittest.mock import Mock, MagicMock
 
+# Local
 from src.handlers.handle_start import _handle_start_configs_index
 
 

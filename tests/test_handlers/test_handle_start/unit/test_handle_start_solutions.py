@@ -1,29 +1,33 @@
 """
 Unit tests for start handlers module in project initialization
 
-------------------------------------------------------
-Name                            Unit   Integ   Func
-------------------------------------------------------
-_handle_start_dirs
-_handle_start_backup
-_handle_start_file
-_handle_start_files
-_handle_start_date
-_handle_start_solutions         X
-_handle_start_configs_form
-_handle_start_configs_index
-_handle_start_configs_proj
-_handle_start_configs
-_handle_start_readme
-_handle_start_template
-handle_start
-------------------------------------------------------
 
+| START HANDLERS                     | Unit  | Integ | Func  |
+| ---------------------------------- | ----- | ----- | ----- |
+| _handle_start_dirs                 |       |       |       |
+| _handle_start_backup               |       |       |       |
+| _handle_start_file                 |       |       |       |
+| _handle_start_files                |       |       |       |
+| _handle_start_date                 |       |       |       |
+| _handle_start_solutions            |   x   |       |       |
+| _handle_start_configs_form         |       |       |       |
+| _handle_start_configs_index        |       |       |       |
+| _handle_start_configs_proj         |       |       |       |
+| _handle_start_configs              |       |       |       |
+| _handle_start_readme               |       |       |       |
+| _handle_start_template             |       |       |       |
+| handle_start                       |       |       |       |
+| ---------------------------------- | ----- | ----- | ----- |
+| OTHERS                             | Unit  | Integ | Func  |
+| ---------------------------------- | ----- | ----- | ----- |
+| ---------------------------------- | ----- | ----- | ----- |
 """
 
+# Python Standard Library
 import os
 import shutil
 
+# Local
 from src.handlers.handle_start import _handle_start_solutions
 
 

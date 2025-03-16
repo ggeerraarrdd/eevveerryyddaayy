@@ -1,32 +1,34 @@
 """
-Unit tests for start handlers module in project initialization
+Integration tests for start handlers module in project initialization
 
----------------------------------- | ---- | ----- | ---- |
-START HANDLERS                     | Unit | Integ | Func |
----------------------------------- | ---- | ----- | ---- |
-_handle_start_dirs                 |      |       |      |
-_handle_start_backup               |      |       |      |
-_handle_start_file                 |      |       |      |
-_handle_start_files                |      |       |      |
-_handle_start_date                 |      |       |      |
-_handle_start_solutions            |      |       |      |
-_handle_start_configs_form         |      |       |      |
-_handle_start_configs_index        |      |       |      |
-_handle_start_configs_proj         |      |       |      |
-_handle_start_configs              |      |       |      |
-_handle_start_readme               |      |       |      |
-_handle_start_template             |      | X     |      |
-handle_start                       |      |       |      |
----------------------------------- | ---- | ----- | ---- |
-OTHERS                             |      |       |      |
----------------------------------- | ---- | ----- | ---- |
-ConfigManager                      |      | X     |      |
----------------------------------- | ---- | ----- | ---- |
+
+| START HANDLERS                     | Unit  | Integ | Func  |
+| ---------------------------------- | ----- | ----- | ----- |
+| _handle_start_dirs                 |       |       |       |
+| _handle_start_backup               |       |       |       |
+| _handle_start_file                 |       |       |       |
+| _handle_start_files                |       |       |       |
+| _handle_start_date                 |       |       |       |
+| _handle_start_solutions            |       |       |       |
+| _handle_start_configs_form         |       |       |       |
+| _handle_start_configs_index        |       |       |       |
+| _handle_start_configs_proj         |       |       |       |
+| _handle_start_configs              |       |       |       |
+| _handle_start_readme               |       |       |       |
+| _handle_start_template             |       |   x   |       |
+| handle_start                       |       |       |       |
+| ---------------------------------- | ----- | ----- | ----- |
+| OTHERS                             | Unit  | Integ | Func  |
+| ---------------------------------- | ----- | ----- | ----- |
+| ConfigManager                      |       |   x   |       |
+| ---------------------------------- | ----- | ----- | ----- |
 """
 
+# Python Standard Library
 import os
 import tempfile
 
+# Local
 from src.config import ConfigManager
 from src.handlers.handle_start import _handle_start_template
 
