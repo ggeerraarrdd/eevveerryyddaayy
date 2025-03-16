@@ -258,10 +258,10 @@ def _handle_runs_prep_file(
     """
     filename = title.lower()
     filename = re.sub(r'[^a-z0-9\s-]', '', filename)
+    filename = filename.strip()
     filename = filename.replace(' ', '_')
     filename = filename.replace('-', '_')
     filename = f'{seq_full}_{filename.strip()}.md'
-
 
     return filename
 
