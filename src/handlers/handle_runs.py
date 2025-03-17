@@ -312,7 +312,7 @@ def _handle_runs_prep_index_date_seq(
         lines: list,
         target_line: int,
         gap_line: str,
-        hyphen: str = HYPHEN
+        hyphen: str
     ) -> list:
     """Handle date sequence gaps (e.g., 2025-01-01)"""
     max_gap = 30
@@ -341,6 +341,7 @@ def _handle_runs_prep_index(
         seq_last: Optional[Union[int, datetime.date]],
         seq_next: Union[int, datetime.date],
         root_dir: str = ROOT_DIR,
+        hyphen: str = HYPHEN,
         index_end: str = INDEX_END
     ) -> int:
     """
@@ -404,7 +405,8 @@ def _handle_runs_prep_index(
                                                          seq_next,
                                                          lines,
                                                          target_line,
-                                                         gap_line)
+                                                         gap_line,
+                                                         hyphen)
             else:
                 raise ValueError('Invalid configuration: TODO')
 
