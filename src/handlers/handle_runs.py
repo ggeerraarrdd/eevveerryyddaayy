@@ -34,6 +34,8 @@ from typing import Any, Dict, Optional, Tuple, Union
 
 # Local
 from src.config import ConfigManager
+from src.config import ROOT_DIR_1
+from src.config import ROOT_DIR_2
 from src.utils import HYPHEN
 from src.utils import INDEX_START
 from src.utils import INDEX_END
@@ -42,6 +44,15 @@ from src.utils import clean_strings
 from src.utils import get_files_created
 from src.utils import get_target_line_dict
 from src.utils import get_target_line_updated
+
+
+
+
+
+ROOT_DIR = ROOT_DIR_1
+
+if not os.path.exists(os.path.join(ROOT_DIR_1, 'src')):
+    ROOT_DIR = ROOT_DIR_2
 
 
 
@@ -266,10 +277,69 @@ def _handle_runs_prep_file(
     return filename
 
 
+def _handle_runs_prep_index_num_seq(
+        seq_last: int,
+        seq_next: int,
+        lines: list,
+        target_line: int,
+        gap_line: str
+    ) -> list:
+    """Handle numeric sequence gaps (e.g., 001, 002, etc.)"""
+    max_gap = 30
+
+    if seq_next <= seq_last:
+        raise ValueError(f"Invalid sequence: next ({seq_next}) must be greater than last ({seq_last})")
+
+    gap_size = seq_next - seq_last - 1
+    if gap_size > max_gap:
+        raise ValueError(f"Gap size ({gap_size}) exceeds maximum allowed ({max_gap})")
+
+    if gap_size > 0:
+        count = 0
+        for i in range(seq_last + 1, seq_next):
+            seq_gap_str = f'{i:03d}'
+            lines.insert(target_line + count, f'| {seq_gap_str}   {gap_line}')
+            count += 1
+
+    return lines
+
+
+def _handle_runs_prep_index_date_seq(
+        seq_last: datetime.date,
+        seq_next: datetime.date,
+        lines: list,
+        target_line: int,
+        gap_line: str,
+        hyphen: str = HYPHEN
+    ) -> list:
+    """Handle date sequence gaps (e.g., 2025-01-01)"""
+    max_gap = 30
+
+    days_difference = (seq_next - seq_last).days
+
+    if days_difference > 1:
+        if days_difference > max_gap:
+            raise ValueError(f"Date gap exceeds maximum allowed ({max_gap} days)")
+
+        seq_bound = seq_next
+        count = 0
+        seq_gap = seq_last + timedelta(days=1)
+
+        while seq_gap < seq_bound:
+            seq_gap_str = seq_gap.strftime(f'%Y{hyphen}%m{hyphen}%d')
+            lines.insert(target_line + count, f'| {seq_gap_str}   {gap_line}')
+            count += 1
+            seq_gap += timedelta(days=1)
+
+    return lines
+
+
 def _handle_runs_prep_index(
         config: ConfigManager,
         seq_last: Optional[Union[int, datetime.date]],
-        seq_next: Union[int, datetime.date]
+        seq_next: Union[int, datetime.date],
+        root_dir: str = ROOT_DIR,
+        index_end: str = INDEX_END
     ) -> int:
     """
     Fill gaps in Index table with empty rows based on sequence notation.
@@ -300,57 +370,45 @@ def _handle_runs_prep_index(
     Gap entries are added to maintain continuity in the index table.
     """
     if seq_last is not None or seq_next is not None:
+        readme_file_path = os.path.join(root_dir, 'README.md')
 
         if config.get('NB') == 1:
             gap_line = '|    |    |    |    |    |\n'
         else:
             gap_line = '|    |    |    |    |\n'
 
-
-        with open('README.md', 'r+', encoding='utf-8') as file:
+        with open(readme_file_path, 'r+', encoding='utf-8') as file:
             lines = file.readlines()
 
             target_line = len(lines) - 1
             while target_line >= 0:
-                if INDEX_END in lines[target_line]:
+                if index_end in lines[target_line]:
                     break
                 target_line -= 1
 
+            if target_line < 0:
+                raise ValueError(f"Index end marker '{index_end}' not found in file")
+
             seq_notation = config.get('SEQ_NOTATION')
 
-            # Case: 001
             if seq_notation == 0:
-                if seq_next - seq_last > 1:
-
-                    count = 0
-                    for i in range(seq_last + 1, seq_next):
-                        seq_gap_str = f'{i:03d}'
-                        lines.insert(target_line + count, f'| {seq_gap_str}   {gap_line}')
-                        count += 1
-
-            # Case: 2025-01-01
+                lines = _handle_runs_prep_index_num_seq(seq_last,
+                                                        seq_next,
+                                                        lines,
+                                                        target_line,
+                                                        gap_line)
             elif seq_notation == 1:
-                if (seq_next - seq_last).days > 1:
-
-                    seq_bound = seq_next
-
-                    count = 0
-                    seq_gap = seq_last + timedelta(days=1)
-
-                    while seq_gap < seq_bound:
-                        seq_gap_str = seq_gap.strftime(f'%Y{HYPHEN}%m{HYPHEN}%d')
-                        lines.insert(target_line + count, f'| {seq_gap_str}   {gap_line}')
-                        count += 1
-                        seq_gap += timedelta(days=1)
-
-            # Case: Invalid
+                lines = _handle_runs_prep_index_date_seq(seq_last,
+                                                         seq_next,
+                                                         lines,
+                                                         target_line,
+                                                         gap_line)
             else:
                 raise ValueError('Invalid configuration: TODO')
 
             file.seek(0)
             file.writelines(lines)
             file.truncate()
-
 
     return 1
 
