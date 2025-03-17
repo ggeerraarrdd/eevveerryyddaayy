@@ -408,7 +408,7 @@ def _handle_runs_prep_index(
                                                          gap_line,
                                                          hyphen)
             else:
-                raise ValueError('Invalid configuration: TODO')
+                raise ValueError('Invalid configuration: SEQ_NOTATION is 0 or 1.')
 
             file.seek(0)
             file.writelines(lines)

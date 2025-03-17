@@ -5,9 +5,13 @@ TD
 from datetime import datetime
 import os
 import tempfile
+from unittest import TestCase
 from unittest.mock import Mock
 
 from src.handlers.handle_runs import _handle_runs_prep_index
+
+
+
 
 
 
@@ -249,6 +253,7 @@ def test_handle_runs_prep_index_case_2():
             lines = file.readlines()
             assert lines == expected
 
+
 def test_handle_runs_prep_index_case_3():
     """Test sequence generation with mock directory and README.md"""
     # Setup mock config
@@ -332,3 +337,90 @@ def test_handle_runs_prep_index_case_3():
         with open(test_readme_file_path, 'r+', encoding='utf-8') as file:
             lines = file.readlines()
             assert lines == expected
+
+
+def test_handle_runs_prep_index_case_4_no_end_marker():
+    """Test that ValueError is raised when end marker is missing"""
+    # Setup mock config
+    mock_config = Mock()
+    mock_config.get.side_effect = {
+        'NB': 0,
+        'SEQ_NOTATION': 0
+    }.get
+
+    # Create temp directory and mock README.md
+    with tempfile.TemporaryDirectory() as test_root_dir:
+        test_readme_file_path = os.path.join(test_root_dir, 'README.md')
+
+        test_readme_template = [
+            '# Test README\n',
+            '<!-- START -->\n',
+            '| Seq   | Col2   | Col3   | Col4   | Col5  |\n',
+            '| ----- | ------ | ------ | ------ | ----- |\n',
+            '| 001   | test   | test   | test   | test  |\n',
+        ]
+
+        # Create mock README with missing end marker
+        with open(test_readme_file_path, 'w', encoding='utf-8') as f:
+            f.truncate(0)
+            f.write(''.join(test_readme_template))
+
+        # Test using TestCase just for assertions
+        test_case = TestCase()
+        with test_case.assertRaises(ValueError) as context:
+            _handle_runs_prep_index(
+                config=mock_config,
+                seq_last=1,
+                seq_next=2,
+                root_dir=test_root_dir,
+                index_end='<!-- END -->'
+            )
+
+        test_case.assertEqual(
+            str(context.exception),
+            "Index end marker '<!-- END -->' not found in file"
+        )
+
+
+def test_handle_runs_prep_index_case_5_invalid_notation():
+    """Test that ValueError is raised when end marker is missing"""
+    # Setup mock config
+    mock_config = Mock()
+    mock_config.get.side_effect = {
+        'NB': 0,
+        'SEQ_NOTATION': 2
+    }.get
+
+    # Create temp directory and mock README.md
+    with tempfile.TemporaryDirectory() as test_root_dir:
+        test_readme_file_path = os.path.join(test_root_dir, 'README.md')
+
+        test_readme_template = [
+            '# Test README\n',
+            '<!-- START -->\n',
+            '| Seq   | Col2   | Col3   | Col4   | Col5  |\n',
+            '| ----- | ------ | ------ | ------ | ----- |\n',
+            '| 001   | test   | test   | test   | test  |\n',
+            '<!-- END -->\n'
+        ]
+
+        # Create mock README with missing end marker
+        with open(test_readme_file_path, 'w', encoding='utf-8') as f:
+            f.truncate(0)
+            f.write(''.join(test_readme_template))
+
+        # Test using TestCase just for assertions
+        test_case = TestCase()
+        with test_case.assertRaises(ValueError) as context:
+            _handle_runs_prep_index(
+                config=mock_config,
+                seq_last=1,
+                seq_next=2,
+                root_dir=test_root_dir,
+                index_end='<!-- END -->'
+            )
+
+        test_case.assertEqual(
+            str(context.exception),
+            'Invalid configuration: SEQ_NOTATION is 0 or 1.'
+        )
