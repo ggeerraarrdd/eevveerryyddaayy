@@ -2,7 +2,7 @@
 TD
 """
 
-from src.utils.utils_runs import clean_strings
+from src.utils import clean_strings
 
 
 
