@@ -38,7 +38,6 @@ from .utils_constants import FIRST_ROW
 from .utils_constants import SECOND_ROW
 from .utils_package import PackageManager
 from .utils_runs import clean_strings
-from .utils_runs import get_files_created
 from .utils_runs import get_target_line_dict
 from .utils_runs import get_target_line_updated
 from .utils_validation import validate_project
@@ -52,7 +51,6 @@ __all__ = [
     'SECOND_ROW',
     'PackageManager',
     'clean_strings',
-    'get_files_created',
     'get_target_line_dict',
     'get_target_line_updated',
     'validate_project'
