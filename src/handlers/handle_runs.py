@@ -415,7 +415,8 @@ def _handle_runs_prep_index(
 
 def _handle_runs_prep_package(
         package: PackageManager,
-        seq: str, seq_full: str,
+        seq: str,
+        seq_full: str,
         new_package: Dict[str, str],
         filename: str
     ) -> int:
