@@ -32,6 +32,9 @@ import os
 import re
 from typing import Any, Dict, Optional, Tuple, Union
 
+# Third-Party Libraries
+from jinja2 import Environment
+
 # Local
 from src.config import ConfigManager
 from src.config import ROOT_DIR_1
@@ -41,7 +44,6 @@ from src.utils import INDEX_START
 from src.utils import INDEX_END
 from src.utils import PackageManager
 from src.utils import clean_strings
-from src.utils import get_files_created
 from src.utils import get_target_line_dict
 from src.utils import get_target_line_updated
 
@@ -529,9 +531,68 @@ def _handle_runs_prep(
     return 1
 
 
-def _handle_runs_implement(
+def _handle_runs_implement_file(
+        config: ConfigManager,
+        data: Dict[str, Any],
+        root_dir: str = ROOT_DIR
+    ) -> int:
+    """
+    Create a solution file using a template and provided data.
+
+    Parameters
+    ----------
+    config : ConfigManager
+        Custom container for validating, storing and retrieving application settings
+    data : Dict[str, Any]
+        Dictionary containing template variables including "filename"
+
+    Returns
+    -------
+    int
+        1 on successful file creation
+    """
+    template_file_path = os.path.join(root_dir, config.get("TEMPLATES_DIR"), 'solution.txt')
+    with open(template_file_path, 'r', encoding='utf-8') as file:
+        template_content = file.read()
+
+    # Create a Jinja2 template object
+    env = Environment(autoescape=True)
+    template = env.from_string(template_content)
+
+    # Render the template with the data
+    filled_document = template.render(data)
+
+    new_file_path = os.path.join(root_dir, 'solutions', data["filename"])
+    with open(new_file_path, 'w', encoding='utf-8') as file:
+        file.write(filled_document)
+
+    return 1
+
+
+def _handle_runs_implement_config(
         config: ConfigManager,
         package: PackageManager
+    ) -> int:
+    """
+    TD
+    """
+    is_cols_width_changed = 0
+    for key, config_value in config.get('COLS_WIDTH').items():
+        package_value = package.get_dictionary('package_widths')[key]
+        if package_value < config_value:
+            package.update_value('package_widths', key, config_value)
+            is_cols_width_changed = 1
+
+    return is_cols_width_changed
+
+
+def _handle_runs_implement_index(
+        config: ConfigManager,
+        package: PackageManager,
+        is_cols_width_changed: int,
+        root_dir: str = ROOT_DIR,
+        index_start: str = INDEX_START,
+        index_end: str = INDEX_END
     ) -> int:
     """
     Process new entries by creating files and updating the Index table.
@@ -561,20 +622,6 @@ def _handle_runs_implement(
     - Properly updated package dictionaries
     - Valid README.md with index block markers
     """
-    # CREATE NEW FILE
-    get_files_created(config, package.get_dictionary('package'))
-
-
-    # UPDATE config_cols_widths
-    change_old_lines = 0
-    for key, config_value in config.get('COLS_WIDTH').items():
-        package_value = package.get_dictionary('package_widths')[key]
-        if package_value < config_value:
-            package.update_value('package_widths', key, config_value)
-            change_old_lines = 1
-
-    # print(change_old_lines)
-
     # CREATE NEW LINE
     if package.get_value('package', 'nb') == 'TBD':
         package.update_value('package', 'nb_index', '')
@@ -584,10 +631,8 @@ def _handle_runs_implement(
                                         package,
                                         data=None)
 
-    # print(new_entry)
-
-    # UPDATE INDEX
-    with open('README.md', 'r+', encoding='utf-8') as file:
+    readme_file_path = os.path.join(root_dir, 'README.md')
+    with open(readme_file_path, 'r+', encoding='utf-8') as file:
         lines = file.readlines()
 
         start_line = None
@@ -595,14 +640,13 @@ def _handle_runs_implement(
 
         # GET START AND END LINES OF INDEX
         for i, line in enumerate(lines):
-            if INDEX_START in line:
+            if index_start in line:
                 start_line = i  # Line numbers start from 1
-            if INDEX_END in line:
+            if index_end in line:
                 end_line = i
 
-
         # UPDATE TARGET LINES (if needed)
-        if change_old_lines == 1:
+        if is_cols_width_changed == 1:
 
             # Process each line between start_line and end_line
             for i in range(start_line + 1, end_line):
@@ -628,7 +672,6 @@ def _handle_runs_implement(
         file.seek(0)
         file.writelines(lines)
         file.truncate()
-
 
     return 1
 
@@ -723,8 +766,14 @@ def handle_runs(
     # RUNS - START (FIRST OR REGULAR)
     _handle_runs_prep(config, package, data, today)
 
-    # RUNS - IMPLEMENT
-    _handle_runs_implement(config, package)
+    # RUNS - IMPLEMENT - FILE
+    _handle_runs_implement_file(config, package.get_dictionary('package'))
+
+    # RUNS - IMPLEMENT - CONFIG - COLS WIDTHS
+    is_cols_width_changed = _handle_runs_implement_config(config, package)
+
+    # RUNS - IMPLEMENT - INDEX
+    _handle_runs_implement_index(config, package, is_cols_width_changed)
 
     # RUNS - CLOSE
     _handle_runs_close(config, package.get_dictionary('package_widths'))

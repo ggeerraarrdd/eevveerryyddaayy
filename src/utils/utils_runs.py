@@ -3,25 +3,36 @@ Utility Functions for Project Runs
 """
 
 # Python Standard Library
-from typing import Any, Dict
-
-# Third-Party Libraries
-from jinja2 import Environment
+import os
+from typing import Dict
 
 # Local
 from src.config import ConfigManager
+from src.config import ROOT_DIR_1
+from src.config import ROOT_DIR_2
 from src.utils import PackageManager
 
 
 
 
 
+ROOT_DIR = ROOT_DIR_1
+
+if not os.path.exists(os.path.join(ROOT_DIR_1, 'src')):
+    ROOT_DIR = ROOT_DIR_2
 
 
 
 
 
-def clean_strings(data: Dict[str, str]) -> Dict[str, str]:
+
+
+
+
+
+def clean_strings(
+        data: Dict[str, str]
+    ) -> Dict[str, str]:
     """
     Remove newline characters from string values in a dictionary.
 
@@ -44,39 +55,10 @@ def clean_strings(data: Dict[str, str]) -> Dict[str, str]:
     return cleaned_dict
 
 
-def get_files_created(config: ConfigManager, data: Dict[str, Any]) -> int:
-    """
-    Create a solution file using a template and provided data.
-
-    Parameters
-    ----------
-    config : ConfigManager
-        Custom container for validating, storing and retrieving application settings
-    data : Dict[str, Any]
-        Dictionary containing template variables including "filename"
-
-    Returns
-    -------
-    int
-        1 on successful file creation
-    """
-    with open(f'{config.get("TEMPLATES_DIR")}/solution.txt', 'r', encoding='utf-8') as file:
-        template_content = file.read()
-
-    # Create a Jinja2 template object
-    env = Environment(autoescape=True)
-    template = env.from_string(template_content)
-
-    # Render the template with the data
-    filled_document = template.render(data)
-
-    with open(f'solutions/{data["filename"]}', 'w', encoding='utf-8') as file:
-        file.write(filled_document)
-
-    return 1
-
-
-def get_target_line_dict(nb_loc: int, line: str) -> Dict[str, str]:
+def get_target_line_dict(
+        nb_loc: int,
+        line: str
+    ) -> Dict[str, str]:
     """
     Parse a table line into a dictionary based on notebook configuration.
 
@@ -107,17 +89,11 @@ def get_target_line_dict(nb_loc: int, line: str) -> Dict[str, str]:
     }
 
     if nb_loc == 0:
-
         keys = list(data.keys())[:-1]  # Exclude 'nb'
-
     elif nb_loc == 1:
-
         keys = list(data.keys())
-
     else:
-
         raise ValueError('Invalid configuration: TODO')
-
 
     segments = []
     for segment in line.split('|'):
@@ -134,7 +110,12 @@ def get_target_line_dict(nb_loc: int, line: str) -> Dict[str, str]:
     return results
 
 
-def get_target_line_updated(is_second_line: bool, config: ConfigManager, package: PackageManager, data: Dict[str, str]) -> str:
+def get_target_line_updated(
+        is_second_line: bool,
+        config: ConfigManager,
+        package: PackageManager,
+        data: Dict[str, str]
+    ) -> str:
     """
     Format a table line with proper padding based on column widths.
 
