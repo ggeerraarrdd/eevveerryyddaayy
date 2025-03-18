@@ -227,7 +227,9 @@ def _handle_start_files(
 
 
 def _handle_start_date(
-        config: ConfigManager
+        config: ConfigManager,
+        root_dir: str,
+        hyphen: str
     ) -> int:
     """
     Update the project start date in configuration file.
@@ -242,9 +244,9 @@ def _handle_start_date(
     int
         1 if update successful
     """
-    today = datetime.now().strftime(f'%Y{HYPHEN}%m{HYPHEN}%d')
+    today = datetime.now().strftime(f'%Y{hyphen}%m{hyphen}%d')
 
-    config_proj_file_path = os.path.join(ROOT_DIR, config.get('CONFIG_DIR'), 'config_proj.py')
+    config_proj_file_path = os.path.join(root_dir, config.get('CONFIG_DIR'), 'config_proj.py')
 
     with open(config_proj_file_path, 'r+', encoding='utf-8') as file:
         lines = file.readlines()
@@ -262,7 +264,8 @@ def _handle_start_date(
 
 
 def _handle_start_solutions(
-        config: ConfigManager
+        config: ConfigManager,
+        root_dir: str
     ) -> int:
     """
     Create solutions directory.
@@ -280,7 +283,7 @@ def _handle_start_solutions(
         1 if directory creation successful or
         0 if directory creation failed
     """
-    solutions_dir = os.path.join(ROOT_DIR, config.get('SOLUTIONS_DIR'))
+    solutions_dir = os.path.join(root_dir, config.get('SOLUTIONS_DIR'))
 
     try:
         if not os.path.exists(solutions_dir):
@@ -567,7 +570,8 @@ def _handle_start_template(
 def handle_start(
         config: ConfigManager,
         package_changes: dict,
-        root_dir: str = ROOT_DIR
+        root_dir: str = ROOT_DIR,
+        hyphen: str = HYPHEN
     ) -> int:
     """
     Coordinate the project initialization process.
@@ -601,10 +605,10 @@ def handle_start(
     _handle_start_files(root_dir, bak_dir)
 
     # HANDLE PROJECT START DATE
-    _handle_start_date(config)
+    _handle_start_date(config, root_dir, hyphen)
 
     # HANDLE SOLUTIONS DIRECTORY
-    _handle_start_solutions(config)
+    _handle_start_solutions(config, root_dir)
 
     if len(package_changes) > 0:
         # print(json.dumps(package_changes, indent=4))

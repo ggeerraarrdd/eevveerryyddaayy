@@ -40,18 +40,18 @@ from src.handlers.handle_start import _handle_start_date
 
 def test_handle_start_date(tmpdir, mocker):
     """Test updating project start date in config file"""
+    # Mock root_dir
+    mock_root_dir = str(tmpdir)
+    mock_hyphen = '\u2011'
+
     # Setup mock config
     mock_config = mocker.Mock()
     mock_config.get.return_value = 'config'
 
-    # Create test config file
-    config_dir = tmpdir.mkdir("config")
-    config_file = config_dir.join("config_proj.py")
-    config_file.write("PROJ_START=''\n")
-
-    # Mock ROOT_DIR and HYPHEN
-    mocker.patch('src.handlers.handle_start.ROOT_DIR', str(tmpdir))
-    mocker.patch('src.handlers.handle_start.HYPHEN', '\u2011')
+    # Create mock config file
+    mock_config_dir = tmpdir.mkdir("config")
+    mock_config_file = mock_config_dir.join("config_proj.py")
+    mock_config_file.write("PROJ_START=''\n")
 
     # Mock datetime to return fixed date
     mock_date = datetime(2025, 1, 1)
@@ -59,13 +59,13 @@ def test_handle_start_date(tmpdir, mocker):
     mock_datetime.now.return_value = mock_date
 
     # Call function
-    result = _handle_start_date(mock_config)
+    result = _handle_start_date(mock_config, mock_root_dir, mock_hyphen)
 
     # Verify config.get was called
     mock_config.get.assert_called_once_with('CONFIG_DIR')
 
     # Verify file was updated with correct date format
-    updated_content = config_file.read()
+    updated_content = mock_config_file.read()
     assert "PROJ_START='2025\u201101\u201101'" in updated_content
 
     # Verify no regular hyphens are used

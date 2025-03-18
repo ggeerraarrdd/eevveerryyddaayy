@@ -41,11 +41,12 @@ from src.handlers.handle_start import handle_start
 
 def test_handle_start(tmpdir):
     """Unit test for handle_start function"""
-    # Mock root_dir and bak_dir
+    # Set up
     mock_root_dir = str(tmpdir)
     mock_bak_dir = str(tmpdir.mkdir("backup"))
+    mock_hyphen = '\u2011'
 
-    # Mock config and package_changes
+    # Set up config and package_changes
     mock_config = Mock(spec='ConfigManager')
     package_changes = {'PROJ_TITLE': 'Test Project'}
 
@@ -68,8 +69,8 @@ def test_handle_start(tmpdir):
         assert result == 1
         mock_dirs.assert_called_once_with(mock_root_dir)
         mock_files.assert_called_once_with(mock_root_dir, mock_bak_dir)
-        mock_date.assert_called_once_with(mock_config)
-        mock_solutions.assert_called_once_with(mock_config)
+        mock_date.assert_called_once_with(mock_config, mock_root_dir, mock_hyphen)
+        mock_solutions.assert_called_once_with(mock_config, mock_root_dir)
         mock_configs.assert_called_once_with(mock_config)
         mock_readme.assert_called_once_with(mock_config, package_changes)
         mock_template.assert_called_once_with(mock_config, package_changes)
