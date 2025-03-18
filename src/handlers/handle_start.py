@@ -195,11 +195,14 @@ def _handle_start_files(
                         'README.md')
 
     # settings.json
-    _handle_start_file(os.path.join(root_dir, '.vscode'),
+    try:
+        _handle_start_file(os.path.join(root_dir, '.vscode'),
                         'settings.json',
                         bak_dir,
                         '',
                         '')
+    except FileNotFoundError:
+        pass
 
     # settings.template.json
     _handle_start_file(os.path.join(root_dir, '.vscode'),
