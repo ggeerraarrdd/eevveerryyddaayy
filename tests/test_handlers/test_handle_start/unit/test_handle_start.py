@@ -24,6 +24,7 @@ Unit tests for start handlers module in project initialization
 """
 
 # Python Standard Library
+import os
 from unittest.mock import Mock, patch
 
 # Local
@@ -38,9 +39,13 @@ from src.handlers.handle_start import handle_start
 
 
 
-def test_handle_start():
+def test_handle_start(tmpdir):
     """Unit test for handle_start function"""
-    # Setup
+    # Mock root_dir and bak_dir
+    mock_root_dir = str(tmpdir)
+    mock_bak_dir = str(tmpdir.mkdir("backup"))
+
+    # Mock config and package_changes
     mock_config = Mock(spec='ConfigManager')
     package_changes = {'PROJ_TITLE': 'Test Project'}
 
@@ -54,15 +59,15 @@ def test_handle_start():
          patch('src.handlers.handle_start._handle_start_template') as mock_template:
 
         # Setup mock return value
-        mock_dirs.return_value = '/mock/backup/dir'
+        mock_dirs.return_value = os.path.join(mock_root_dir, mock_bak_dir)
 
         # Execute
-        result = handle_start(mock_config, package_changes)
+        result = handle_start(mock_config, package_changes, mock_root_dir)
 
         # Assert
         assert result == 1
-        mock_dirs.assert_called_once()
-        mock_files.assert_called_once_with('/mock/backup/dir')
+        mock_dirs.assert_called_once_with(mock_root_dir)
+        mock_files.assert_called_once_with(mock_root_dir, mock_bak_dir)
         mock_date.assert_called_once_with(mock_config)
         mock_solutions.assert_called_once_with(mock_config)
         mock_configs.assert_called_once_with(mock_config)

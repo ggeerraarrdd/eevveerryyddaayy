@@ -40,27 +40,28 @@ from src.handlers.handle_start import _handle_start_files
 
 def test_handle_start_files(tmpdir, mocker):
     """Test handling of all project files"""
-    # Mock _handle_start_file to avoid actual file operations
-    mock_handle_file = mocker.patch('src.handlers.handle_start._handle_start_file')
+    # Mock root_dir and bak_dir
+    mock_root_dir = str(tmpdir)
+    mock_bak_dir = str(tmpdir.mkdir("backup"))
 
-    # Mock ROOT_DIR
-    mock_root = str(tmpdir)
-    mocker.patch('src.handlers.handle_start.ROOT_DIR', mock_root)
+    # Mock _handle_start_file
+    mock_handle_start_file = mocker.patch('src.handlers.handle_start._handle_start_file')
 
-    bak_dir = str(tmpdir.mkdir("backup"))
+    # Execute
+    result = _handle_start_files(mock_root_dir, mock_bak_dir)
 
-    result = _handle_start_files(bak_dir)
+    # Assert expected return value
+    assert result == 1
 
-    # Verify _handle_start_file was called for each expected file
-    assert mock_handle_file.call_count == 6  # Number of files handled
+    # Assert _handle_start_file handle the required number of files
+    # Currently: 6
+    assert mock_handle_start_file.call_count == 6
 
-    # Verify specific calls if needed
-    mock_handle_file.assert_any_call(
-        mock_root,
+    # Assert specific call
+    mock_handle_start_file.assert_any_call(
+        mock_root_dir,
         'README.md',
-        bak_dir,
-        os.path.join(mock_root, 'docs'),
+        mock_bak_dir,
+        os.path.join(mock_root_dir, 'docs'),
         'README.md'
     )
-
-    assert result == 1

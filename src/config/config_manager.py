@@ -148,7 +148,6 @@ class ConfigManager:
             else:
                 self.config[key] = validated_value
 
-        print(changes)
         return changes
 
 

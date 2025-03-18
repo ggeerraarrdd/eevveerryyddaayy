@@ -60,7 +60,7 @@ def test_handle_start_dirs(tmpdir, mocker):
                  mocker.Mock(now=lambda: mock_date))
 
     # Call function
-    result = _handle_start_dirs()
+    result = _handle_start_dirs(mock_root)
 
     # Check expected path was created
     expected_path = os.path.join(

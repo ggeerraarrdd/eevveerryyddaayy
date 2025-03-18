@@ -40,7 +40,7 @@ from .utils import validate_project
 
 
 
-def start_project(package: Dict[str, Tuple[type, Any]]) -> int:
+def start_project(config: ConfigManager, package: Dict[str, Tuple[type, Any]]) -> int:
     """
     Initialize the project.
     
@@ -58,14 +58,11 @@ def start_project(package: Dict[str, Tuple[type, Any]]) -> int:
     int
         Status code: 1 for success, 0 for failure
     """
-    config = ConfigManager()
-
     package_changes = config.load_settings_from_form(package)
 
     handle_start(config, package_changes)
 
     print('Project initialized')
-
 
     return 1
 
@@ -186,8 +183,13 @@ def eevveerryyddaayy(*args: Any, **kwargs: Any) -> Union[int, Any]:
                 return 0
 
             print('Initializing project...')
-            start_project(package)
+
+            config = ConfigManager()
+            start_project(config, package)
+            del config
+
             print('Done')
+
             return 1
 
         if kwargs['source'] == 1:

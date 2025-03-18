@@ -51,6 +51,7 @@ if not os.path.exists(os.path.join(ROOT_DIR_1, 'src')):
 
 
 def _handle_start_dirs(
+        root_dir: str
     ) -> str:
     """
     Create backup directory for project initialization files.
@@ -59,8 +60,12 @@ def _handle_start_dirs(
     -------
     str
         Path to the created backup directory
+    
+    Example
+    -------
+    'root_dir/assets/start/2025-03-15_start_bak'
     """
-    assets_dir = os.path.join(ROOT_DIR, 'assets')
+    assets_dir = os.path.join(root_dir, 'assets')
     start_dir = os.path.join(assets_dir, 'start')
     bak_dir = os.path.join(start_dir, f'{datetime.now().strftime("%Y-%m-%d")}_start_bak')
 
@@ -142,7 +147,8 @@ def _handle_start_file(
 
 
 def _handle_start_files(
-        bak_dir: str,
+        root_dir: str,
+        bak_dir: str
     ) -> int:
     """
     Handle all project initialization of files.
@@ -156,53 +162,61 @@ def _handle_start_files(
     -------
     int
         1 if all file operations successful
+    
+    Notes
+    -----
+    Current list of files to handle:
+    README.md
+    README.template.md
+    settings.json
+    settings.template.json
+    renovate.json
+    codecov.yaml
+    
+    Example args passed to _handle_start_file():
+    (1) root/full/path/eevveerryyddaayy
+    (2) root/full/path/eevveerryyddaayy/README.md
+    (3) root/full/path/eevveerryyddaayy/assets/start/2025-03-15_start_bak
+    (4) root/full/path/eevveerryyddaayy/docs
+    (5) README.md
     """
-    # Current list of files to handle
-    # -------------------------------
     # README.md
-    # README.template.md
-    # settings.json
-    # settings.template.json
-    # renovate.json
-    # api.yaml
-
-    # README.md
-    _handle_start_file(ROOT_DIR,
+    _handle_start_file(root_dir,
                         'README.md',
                         bak_dir,
-                        os.path.join(ROOT_DIR, 'docs'),
+                        os.path.join(root_dir, 'docs'),
                         'README.md')
 
     # README.template.md
-    _handle_start_file(ROOT_DIR,
+    _handle_start_file(root_dir,
                         'README.template.md',
                         bak_dir,
-                        ROOT_DIR,
+                        root_dir,
                         'README.md')
 
     # settings.json
-    _handle_start_file(os.path.join(ROOT_DIR, '.vscode'),
+    _handle_start_file(os.path.join(root_dir, '.vscode'),
                         'settings.json',
                         bak_dir,
                         '',
                         '')
 
     # settings.template.json
-    _handle_start_file(os.path.join(ROOT_DIR, '.vscode'),
+    _handle_start_file(os.path.join(root_dir, '.vscode'),
                         'settings.template.json',
                         bak_dir,
-                        os.path.join(ROOT_DIR, '.vscode'),
+                        os.path.join(root_dir, '.vscode'),
                         'settings.json')
 
     # renovate.json
-    _handle_start_file(ROOT_DIR,
+    _handle_start_file(root_dir,
                        'renovate.json',
                        bak_dir,
                        '',
                        '')
 
     # api.yaml
-    _handle_start_file(os.path.join(ROOT_DIR, '.github/workflows'),
+    _handle_start_file(os.path.join(root_dir, '.github/workflows'),
                        'codecov.yaml',
                        bak_dir,
                        '',
@@ -552,7 +566,8 @@ def _handle_start_template(
 
 def handle_start(
         config: ConfigManager,
-        package_changes: dict
+        package_changes: dict,
+        root_dir: str = ROOT_DIR
     ) -> int:
     """
     Coordinate the project initialization process.
@@ -580,10 +595,10 @@ def handle_start(
     - Modifying README and template files
     """
     # HANDLE BACKUP DIR
-    bak_dir = _handle_start_dirs()
+    bak_dir = _handle_start_dirs(root_dir)
 
     # HANDLE FILES
-    _handle_start_files(bak_dir)
+    _handle_start_files(root_dir, bak_dir)
 
     # HANDLE PROJECT START DATE
     _handle_start_date(config)
