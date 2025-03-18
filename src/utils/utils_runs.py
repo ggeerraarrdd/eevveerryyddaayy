@@ -93,7 +93,7 @@ def get_target_line_dict(
     elif nb_loc == 1:
         keys = list(data.keys())
     else:
-        raise ValueError('Invalid configuration: TODO')
+        raise ValueError('Invalid configuration: NB must be 0 or 1.')
 
     segments = []
     for segment in line.split('|'):
@@ -188,7 +188,7 @@ def get_target_line_updated(
 
     else:
 
-        raise ValueError('Invalid configuration: TODO')
+        raise ValueError('Invalid configuration: NB must be 0 or 1')
 
     results = target_line
 
