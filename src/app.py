@@ -17,14 +17,18 @@ application logic, routing inputs to appropriate handlers.
 
 # Python Standard Library
 from datetime import datetime
-from typing import Any, Dict, List, Tuple, Union
 import json
+import os
+from typing import Any, Dict, List, Tuple, Union
+
 
 # Third-Party Libraries
 import ipywidgets as widgets
 
 # Local
 from .config import ConfigManager
+from .config import ROOT_DIR_1
+from .config import ROOT_DIR_2
 from .forms import create_entry_form
 from .handlers import handle_start
 from .handlers import handle_runs
@@ -35,12 +39,25 @@ from .utils import validate_project
 
 
 
+ROOT_DIR = ROOT_DIR_1
+
+if not os.path.exists(os.path.join(ROOT_DIR_1, 'src')):
+    ROOT_DIR = ROOT_DIR_2
 
 
 
 
 
-def start_project(config: ConfigManager, package: Dict[str, Tuple[type, Any]]) -> int:
+
+
+
+
+
+def start_project(
+        config: ConfigManager,
+        package: Dict[str, Tuple[type, Any]],
+        root_dir: str
+    ) -> int:
     """
     Initialize the project.
     
@@ -60,7 +77,7 @@ def start_project(config: ConfigManager, package: Dict[str, Tuple[type, Any]]) -
     """
     package_changes = config.load_settings_from_form(package)
 
-    handle_start(config, package_changes)
+    handle_start(config, package_changes, root_dir)
 
     print('Project initialized')
 
@@ -128,7 +145,10 @@ def run_project(package: PackageManager, data: List[Any]) -> int:
     return 1
 
 
-def eevveerryyddaayy(*args: Any, **kwargs: Any) -> Union[int, Any]:
+def eevveerryyddaayy(
+        *args: Any,
+        **kwargs: Any
+    ) -> Union[int, Any]:
     """
     Main entry point that routes form inputs to appropriate handlers.
     
@@ -153,6 +173,8 @@ def eevveerryyddaayy(*args: Any, **kwargs: Any) -> Union[int, Any]:
         Status code (int) or form widget (for source=2)
         1 for success, 0 for failure or error condition
     """
+    root_dir = ROOT_DIR
+
     is_initialized = validate_project()
 
     # from IPython import get_ipython
@@ -185,7 +207,7 @@ def eevveerryyddaayy(*args: Any, **kwargs: Any) -> Union[int, Any]:
             print('Initializing project...')
 
             config = ConfigManager()
-            start_project(config, package)
+            start_project(config, package, root_dir)
             del config
 
             print('Done')
@@ -215,9 +237,9 @@ def eevveerryyddaayy(*args: Any, **kwargs: Any) -> Union[int, Any]:
 
     elif kwargs['source'] == 3:
         # ENTRY FORM - every_entry.ipynb - button clicked
-        # package = PackageManager()
-        # run_project(package, args)
-        # package.reset()
+        package = PackageManager()
+        run_project(package, args)
+        package.reset()
         return 1
 
     else:

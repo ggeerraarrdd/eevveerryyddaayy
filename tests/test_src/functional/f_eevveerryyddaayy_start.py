@@ -23,6 +23,7 @@ def copy_selected_items(src_dir, dest_dir, selected_items):
         elif os.path.isfile(src_path):
             shutil.copy2(src_path, dest_path)
 
+
 def get_directory_state(directory):
     """
     Get the current state of a directory for comparison.
@@ -33,7 +34,8 @@ def get_directory_state(directory):
         state[rel_path] = {"dirs": sorted(dirs), "files": sorted(files)}
     return state
 
-def x_eevveerryyddaayy():
+
+def x_eevveerryyddaayy(tmpdir, mocker):
     """
     Functional test for the EEVVEERRYYDDAAYY project.
     """
@@ -45,8 +47,13 @@ def x_eevveerryyddaayy():
         ".vscode",
     ]
 
+
+
     # Step 1: Create a temporary directory and copy the selected items
     with tempfile.TemporaryDirectory() as temp_dir:
+        # Mock ROOT_DIR and HYPHEN
+        mocker.patch('src.eevveerryyddaayy.ROOT_DIR', str(tmpdir))
+
         copy_selected_items(root_dir, temp_dir, selected_items)
 
         with patch('src.utils.validate_project', return_value=False):
