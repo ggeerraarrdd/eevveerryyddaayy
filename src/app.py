@@ -173,7 +173,11 @@ def eevveerryyddaayy(
         Status code (int) or form widget (for source=2)
         1 for success, 0 for failure or error condition
     """
-    root_dir = ROOT_DIR
+    root_dir = kwargs['root_dir']
+    if not root_dir:
+        root_dir = ROOT_DIR
+
+    # print(root_dir)
 
     is_initialized = validate_project()
 
