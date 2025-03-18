@@ -203,7 +203,7 @@ def _handle_start_files(
 
     # api.yaml
     _handle_start_file(os.path.join(ROOT_DIR, '.github/workflows'),
-                       'api.yaml',
+                       'codecov.yaml',
                        bak_dir,
                        '',
                        '')
