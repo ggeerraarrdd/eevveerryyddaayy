@@ -32,6 +32,6 @@ TEMPLATES_DIR : str
 import os
 ROOT_DIR_1=os.path.abspath(os.path.join(os.getcwd(), '.'))
 ROOT_DIR_2=os.path.abspath(os.path.join(os.getcwd(), '..'))
-SOLUTIONS_DIR="solutions"
-CONFIG_DIR="src/config"
-TEMPLATES_DIR="src/templates"
+SOLUTIONS_DIR='solutions'
+CONFIG_DIR='src/config'
+TEMPLATES_DIR='src/templates'

@@ -17,6 +17,15 @@ from .config_paths import CONFIG_DIR
 
 
 
+ROOT_DIR = ROOT_DIR_1
+
+if not os.path.exists(os.path.join(ROOT_DIR_1, 'src')):
+    ROOT_DIR = ROOT_DIR_2
+
+
+
+
+
 
 
 
@@ -61,28 +70,25 @@ class ConfigManager:
         load_settings_from_form(config_vars: Optional[Dict[str, Tuple[type, Any]]] = None) -> None
             Process configuration variables with provided parameters or defaults
     """
-    def __init__(self):
+    def __init__(self, root_dir: str = ROOT_DIR, config_dir: str = CONFIG_DIR):
         # Initialize empty configuration dictionary
         self.config: Dict[str, Any] = {}
 
         # Load and validate constants from config.py
-        self._load_settings_from_system()
+        self._load_settings_from_system(root_dir, config_dir)
 
 
-    def _load_settings_from_system(self) -> None:
+    def _load_settings_from_system(self, root_dir, config_dir) -> None:
         """
         Load and validate constants from config.py and config_proj.py files
         """
-        config_dir_local = os.path.join(ROOT_DIR_1, CONFIG_DIR)
-
-        if not os.path.exists(config_dir_local):
-            config_dir_local = os.path.join(ROOT_DIR_2, CONFIG_DIR)
+        config_dir_local = os.path.join(root_dir, config_dir)
 
         config_files = [
-            f"{config_dir_local}/config_proj.py",
-            f"{config_dir_local}/config_index.py",
-            f"{config_dir_local}/config_form.py",
-            f"{config_dir_local}/config_paths.py",
+            f'{config_dir_local}/config_proj.py',
+            f'{config_dir_local}/config_index.py',
+            f'{config_dir_local}/config_form.py',
+            f'{config_dir_local}/config_paths.py',
         ]
 
         for config_file in config_files:
@@ -142,6 +148,7 @@ class ConfigManager:
             else:
                 self.config[key] = validated_value
 
+        print(changes)
         return changes
 
 
