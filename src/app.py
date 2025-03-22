@@ -17,7 +17,6 @@ application logic, routing inputs to appropriate handlers.
 
 # Python Standard Library
 from datetime import datetime
-import json
 import os
 from typing import Any, Dict, List, Tuple, Union
 
@@ -88,14 +87,16 @@ def update_project(package):
     """
     TD
     """
-    config = ConfigManager()
+    # config = ConfigManager()
 
-    config_all = config.get_all()
+    # config_all = config.get_all()
 
-    print(json.dumps(config_all, indent=4))
-    print(package)
+    # print(json.dumps(config_all, indent=4))
+    # print(package)
 
-    return 1
+    _package = package
+
+    return 0
 
 
 def add_project() -> widgets.VBox:
