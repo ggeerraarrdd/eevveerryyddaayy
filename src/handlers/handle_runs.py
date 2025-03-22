@@ -680,7 +680,8 @@ def _handle_runs_implement_index(
 
 def _handle_runs_close(
         config: ConfigManager,
-        column_widths: Dict[str, int]
+        column_widths: Dict[str, int],
+        root_dir: str = ROOT_DIR
     ) -> int:
     """
     Update the COLS_WIDTH configuration with new column width values.
@@ -702,7 +703,8 @@ def _handle_runs_close(
     Updates the config_index.py file by replacing the COLS_WIDTH dictionary
     with updated values serialized as JSON.
     """
-    with open(f"{config.get('CONFIG_DIR')}/config_index.py", 'r+', encoding='utf-8') as file:
+    config_index_path = os.path.join(root_dir, config.get('CONFIG_DIR'), 'config_index.py')
+    with open(config_index_path, 'r+', encoding='utf-8') as file:
         lines = file.readlines()
 
         line_target = None
