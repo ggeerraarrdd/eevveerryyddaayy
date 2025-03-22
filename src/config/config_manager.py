@@ -70,7 +70,11 @@ class ConfigManager:
         load_settings_from_form(config_vars: Optional[Dict[str, Tuple[type, Any]]] = None) -> None
             Process configuration variables with provided parameters or defaults
     """
-    def __init__(self, root_dir: str = ROOT_DIR, config_dir: str = CONFIG_DIR):
+    def __init__(
+            self,
+            root_dir: str = ROOT_DIR,
+            config_dir: str = CONFIG_DIR
+        ):
         # Initialize empty configuration dictionary
         self.config: Dict[str, Any] = {}
 
@@ -78,7 +82,11 @@ class ConfigManager:
         self._load_settings_from_system(root_dir, config_dir)
 
 
-    def _load_settings_from_system(self, root_dir, config_dir) -> None:
+    def _load_settings_from_system(
+            self,
+            root_dir,
+            config_dir
+        ) -> None:
         """
         Load and validate constants from config.py and config_proj.py files
         """
@@ -111,11 +119,15 @@ class ConfigManager:
                         if self._validate_value(key, value, type(value)):
                             self.config[key] = value
 
-            except (ImportError, AttributeError, ValueError) as e:
+            except (FileNotFoundError, ImportError, AttributeError, ValueError) as e:
                 print(f"Error loading constants from {config_file}: {e}")
+                raise
 
 
-    def load_settings_from_form(self, config_vars: Optional[Dict[str, Tuple[type, Any]]] = None) -> None:
+    def load_settings_from_form(
+            self,
+            config_vars: Optional[Dict[str, Tuple[type, Any]]] = None
+        ) -> None:
         """
         Process configuration variables with provided parameters or defaults
         """
@@ -151,7 +163,12 @@ class ConfigManager:
         return changes
 
 
-    def _convert_and_validate(self, value: Any, expected_type: type, default: Any) -> Any:
+    def _convert_and_validate(
+            self,
+            value: Any,
+            expected_type: type,
+            default: Any
+        ) -> Any:
         """
         Convert and validate a value to its expected type
         """
@@ -178,33 +195,54 @@ class ConfigManager:
             return default
 
 
-    def _validate_value(self, key: str, value: Any, expected_type: type) -> bool: # pylint: disable=unused-argument
+    def _validate_value(
+            self,
+            _key: str,
+            value: Any,
+            expected_type: type
+        ) -> bool:
         """
         Validate a value against its expected type
+
+        TD: Fix bug
         """
         return isinstance(value, expected_type)
 
 
-    def _notify_change(self, key: str, old_value: Any, new_value: Any) -> None:
+    def _notify_change(
+            self,
+            key: str,
+            old_value: Any,
+            new_value: Any
+        ) -> None:
         """
         Log configuration changes
         """
         print(f"Config change: {key} changed from {old_value} to {new_value}")
 
 
-    def get(self, key: str) -> Optional[Any]:
+    def get(
+            self,
+            key: str
+        ) -> Optional[Any]:
         """
         Safely get configuration value
         """
         return self.config.get(key)
 
 
-    def get_all(self) -> Dict[str, Any]:
+    def get_all(
+            self
+        ) -> Dict[str, Any]:
         """Get the entire configuration dictionary"""
         return self.config.copy()
 
 
-    def update(self, key: str, value: Any) -> bool:
+    def update(
+            self,
+            key: str,
+            value: Any
+        ) -> bool:
         """
         Update a configuration value with validation
         """

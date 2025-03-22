@@ -5,6 +5,8 @@ TD
 import os
 import tempfile
 
+import pytest
+
 from src.config import ConfigManager
 
 
@@ -88,3 +90,18 @@ def test_config():
             'SITE_OPTIONS': {'old_value': ['Codewars', 'DataLemur', 'LeetCode'], 'new_value': ['Site 1', 'Site 2']}
         }
         assert changes == expected_changes
+
+
+def test_config_load_error():
+    """Test _handle_start_readme functionality with default configs"""
+    # Set up temporary directories and files
+    with tempfile.TemporaryDirectory() as temp_dir:
+        test_root_dir = temp_dir
+        test_config_dir = os.path.join(test_root_dir, 'src', 'config')
+
+        # Create the directory structure
+        os.makedirs(test_config_dir, exist_ok=True)
+
+        # Test all possible exceptions
+        with pytest.raises((FileNotFoundError, ImportError, AttributeError, ValueError)):
+            ConfigManager(test_root_dir, test_config_dir)
