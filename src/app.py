@@ -99,7 +99,8 @@ def update_project(package):
     return 0
 
 
-def add_project() -> widgets.VBox:
+def add_project(
+    ) -> widgets.VBox:
     """
     Create entry form for adding new items to the project.
     
@@ -118,7 +119,10 @@ def add_project() -> widgets.VBox:
     return form_entry
 
 
-def run_project(package: PackageManager, data: List[Any]) -> int:
+def run_project(
+        package: PackageManager,
+        data: List[Any]
+    ) -> int:
     """
     Process new entry data and update project resources.
     
