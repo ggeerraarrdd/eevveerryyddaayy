@@ -237,7 +237,7 @@ def eevveerryyddaayy(
             print('Not yet implemented')
             return 0
 
-    elif kwargs['source'] == 2:
+    if kwargs['source'] == 2:
         # ENTRY FORM - every_entry.ipynb
         if is_initialized:
             return add_project()
@@ -246,15 +246,12 @@ def eevveerryyddaayy(
         print('Use every_start.ipynb to initialize project.')
         return 0
 
-    elif kwargs['source'] == 3:
+    if kwargs['source'] == 3:
         # ENTRY FORM - every_entry.ipynb - button clicked
         package = PackageManager()
         run_project(package, args)
         package.reset()
         return 1
 
-    else:
-        print('Invalid source')
-        return 0
-
+    print('Invalid source')
     return 0
