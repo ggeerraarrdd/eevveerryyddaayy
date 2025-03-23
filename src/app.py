@@ -254,6 +254,3 @@ def eevveerryyddaayy(
     else:
         print('Invalid source')
         return 0
-
-
-    return 0
