@@ -178,12 +178,10 @@ def eevveerryyddaayy(
         Status code (int) or form widget (for source=2)
         1 for success, 0 for failure or error condition
     """
+
     try:
         root_dir = kwargs['root_dir']
     except KeyError:
-        root_dir = None
-
-    if not root_dir:
         root_dir = ROOT_DIR
 
     # print(root_dir)
@@ -258,3 +256,5 @@ def eevveerryyddaayy(
     else:
         print('Invalid source')
         return 0
+
+    return 0
