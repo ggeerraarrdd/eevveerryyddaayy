@@ -30,7 +30,7 @@ from .config import ROOT_DIR_1
 from .config import ROOT_DIR_2
 from .forms import create_entry_form
 from .handlers import handle_start_main
-from .handlers import handle_runs
+from .handlers import handle_runs_main
 from .utils import PackageManager
 from .utils import validate_project
 
@@ -145,7 +145,7 @@ def run_project(
 
     today = datetime.now()
 
-    handle_runs(config, package, data[0], today)
+    handle_runs_main(config, package, data[0], today)
 
     return 1
 

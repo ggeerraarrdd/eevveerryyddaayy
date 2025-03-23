@@ -17,7 +17,7 @@ naming conventions, sequencing, and organization of entries.
 
 Functions:
     Public:
-        handle_runs: Main entry point that coordinates the entire workflow
+        handle_runs_main: Main entry point that coordinates the entire workflow
 
     Private (internal use only):
         _handle_runs_prep_*: Prepare sequences, filenames, and data
@@ -727,7 +727,7 @@ def _handle_runs_close(
     return 1
 
 
-def handle_runs(
+def handle_runs_main(
         config: ConfigManager,
         package: PackageManager,
         data: Dict[str, Any], today: datetime

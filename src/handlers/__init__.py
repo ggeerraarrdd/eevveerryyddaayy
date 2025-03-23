@@ -12,7 +12,7 @@ the business logic and processes for:
 Components
 ----------
 Functions:
-    handle_runs:
+    handle_runs_main:
         Manages execution of project operations during normal usage
     handle_start:
         Controls initial project setup and configuration
@@ -21,11 +21,11 @@ The handler functions act as entry points for key application processes,
 coordinating between UI inputs, configuration management, and project resources.
 """
 
-from .handle_runs import handle_runs
+from .handle_runs import handle_runs_main
 from .handle_start import handle_start_main
 
 
 __all__ = [
-    'handle_runs',
+    'handle_runs_main',
     'handle_start_main'
 ]
