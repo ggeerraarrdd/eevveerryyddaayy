@@ -2,7 +2,7 @@ appnope==0.1.4
 asttokens==3.0.0
 comm==0.2.2
 coverage==7.6.12
-debugpy==1.8.12
+debugpy==1.8.13
 decorator==5.1.1
 executing==2.2.0
 iniconfig==2.0.0
