@@ -112,19 +112,21 @@ def test_url_widget_creation_with_sites_default():
     assert isinstance(widgets_package['site'], Dropdown)
 
 
-def test_url_widget_creation_with_sites():
+def test_url_widget_creation_with_one_site():
     """
     TD
     """
     test_config = ConfigManager()
-    test_config.update('SITE_OPTIONS', ['Codewars', 'DataLemur'])
+    test_config.update('SITE_OPTIONS', ['Codewars'])
 
     widgets_package = _create_entry_form_widgets(test_config)
+
+    print(widgets_package['site'])
 
     assert len(widgets_package) == 10
 
     # Test URL widget
-    assert widgets_package['site'].options == ('', 'Codewars', 'DataLemur')
+    assert widgets_package['site'].options == ('Codewars',)
     assert isinstance(widgets_package['site'], Dropdown)
 
 

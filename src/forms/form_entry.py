@@ -150,11 +150,11 @@ def _create_entry_form_widgets(
         'page_title': page_title_widget
     }
 
-
     return widgets_package
 
 
-def _create_entry_form_head() -> widgets.VBox:
+def _create_entry_form_head(
+    ) -> widgets.VBox:
     """
     Creates the header section of the form.
     
@@ -194,7 +194,10 @@ def _create_entry_form_head() -> widgets.VBox:
     return section_head
 
 
-def _create_entry_form_main(config: ConfigManager, pidgets: Dict[str, widgets.Widget]) -> widgets.VBox:
+def _create_entry_form_main(
+        config: ConfigManager,
+        pidgets: Dict[str, widgets.Widget]
+    ) -> widgets.VBox:
     """
     Creates the main section of the form with input fields.
     
