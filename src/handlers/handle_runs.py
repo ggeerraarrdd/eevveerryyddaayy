@@ -730,7 +730,8 @@ def _handle_runs_close(
 def handle_runs_main(
         config: ConfigManager,
         package: PackageManager,
-        data: Dict[str, Any], today: datetime
+        data: Dict[str, Any],
+        today: datetime
     ) -> int:
     """
     Coordinate the execution flow for processing form inputs and updating project files.
