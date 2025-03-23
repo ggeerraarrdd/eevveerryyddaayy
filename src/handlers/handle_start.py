@@ -7,7 +7,7 @@ templates based on those settings.
 
 Functions:
     Public:
-        handle_start: Main entry point for project initialization
+        handle_start_main: Main entry point for project initialization
     
     Private (internal use only):
         _handle_start_date: Updates project start date in config
@@ -33,7 +33,7 @@ from src.utils import INDEX_START
 from src.utils import INDEX_END
 
 
-
+print("here")
 
 
 ROOT_DIR = ROOT_DIR_1
@@ -570,7 +570,7 @@ def _handle_start_template(
     return 1
 
 
-def handle_start(
+def handle_start_main(
         config: ConfigManager,
         package_changes: dict,
         root_dir: str = ROOT_DIR,

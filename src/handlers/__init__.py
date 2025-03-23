@@ -22,10 +22,10 @@ coordinating between UI inputs, configuration management, and project resources.
 """
 
 from .handle_runs import handle_runs
-from .handle_start import handle_start
+from .handle_start import handle_start_main
 
 
 __all__ = [
     'handle_runs',
-    'handle_start'
+    'handle_start_main'
 ]

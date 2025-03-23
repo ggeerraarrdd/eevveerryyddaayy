@@ -29,7 +29,7 @@ from .config import ConfigManager
 from .config import ROOT_DIR_1
 from .config import ROOT_DIR_2
 from .forms import create_entry_form
-from .handlers import handle_start
+from .handlers import handle_start_main
 from .handlers import handle_runs
 from .utils import PackageManager
 from .utils import validate_project
@@ -76,7 +76,7 @@ def start_project(
     """
     package_changes = config.load_settings_from_form(package)
 
-    handle_start(config, package_changes, root_dir)
+    handle_start_main(config, package_changes, root_dir)
 
     print('Project initialized')
 

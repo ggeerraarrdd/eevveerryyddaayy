@@ -15,7 +15,7 @@ from unittest.mock import patch
 
 
 
-def test_utils_runs_root_dir_no_fallback():
+def test_handle_start_root_dir_no_fallback():
     """
     Test that ROOT_DIR falls back to ROOT_DIR_2 when ROOT_DIR_1/src doesn't exist
     """
@@ -26,14 +26,14 @@ def test_utils_runs_root_dir_no_fallback():
         mock_exists.return_value = True
 
         # Import utils_runs after setting up the patches
-        import src.utils.utils_runs  # pylint: disable=import-outside-toplevel
-        importlib.reload(src.utils.utils_runs)
+        import src.handlers.handle_start  # pylint: disable=import-outside-toplevel
+        importlib.reload(src.handlers.handle_start)
 
-        assert src.utils.utils_runs.ROOT_DIR == 'fake/path/1'
+        assert src.handlers.handle_start.ROOT_DIR == 'fake/path/1'
         mock_exists.assert_called_once_with(os.path.join('fake/path/1', 'src'))
 
 
-def test_utils_runs_root_dir_with_fallback():
+def test_handle_start_root_dir_with_fallback():
     """
     Test that ROOT_DIR falls back to ROOT_DIR_2 when ROOT_DIR_1/src doesn't exist
     """
@@ -44,8 +44,8 @@ def test_utils_runs_root_dir_with_fallback():
         mock_exists.return_value = False
 
         # Import utils_runs after setting up the patches
-        import src.utils.utils_runs  # pylint: disable=import-outside-toplevel
-        importlib.reload(src.utils.utils_runs)
+        import src.handlers.handle_start   # pylint: disable=import-outside-toplevel
+        importlib.reload(src.handlers.handle_start)
 
-        assert src.utils.utils_runs.ROOT_DIR == 'fake/path/2'
+        assert src.handlers.handle_start.ROOT_DIR == 'fake/path/2'
         mock_exists.assert_called_once_with(os.path.join('fake/path/1', 'src'))

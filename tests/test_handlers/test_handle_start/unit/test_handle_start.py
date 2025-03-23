@@ -16,7 +16,7 @@ Unit tests for start handlers module in project initialization
 | _handle_start_configs              |       |       |       |
 | _handle_start_readme               |       |       |       |
 | _handle_start_template             |       |       |       |
-| handle_start                       |       |       |       |
+| handle_start_main                  |       |       |       |
 | ---------------------------------- | ----- | ----- | ----- |
 | OTHERS                             | Unit  | Integ | Func  |
 | ---------------------------------- | ----- | ----- | ----- |
@@ -28,7 +28,7 @@ import os
 from unittest.mock import Mock, patch
 
 # Local
-from src.handlers.handle_start import handle_start
+from src.handlers.handle_start import handle_start_main
 
 
 
@@ -63,7 +63,7 @@ def test_handle_start(tmpdir):
         mock_dirs.return_value = os.path.join(mock_root_dir, mock_bak_dir)
 
         # Execute
-        result = handle_start(mock_config, package_changes, mock_root_dir)
+        result = handle_start_main(mock_config, package_changes, mock_root_dir)
 
         # Assert
         assert result == 1
@@ -89,7 +89,7 @@ def test_handle_start_no_changes():
          patch('src.handlers.handle_start._handle_start_solutions') as mock_solutions:
 
         # Execute
-        result = handle_start(mock_config, package_changes)
+        result = handle_start_main(mock_config, package_changes)
 
         # Assert
         assert result == 1

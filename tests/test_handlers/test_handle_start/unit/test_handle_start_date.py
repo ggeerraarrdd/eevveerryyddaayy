@@ -16,7 +16,7 @@ Unit tests for start handlers module in project initialization
 | _handle_start_configs              |       |       |       |
 | _handle_start_readme               |       |       |       |
 | _handle_start_template             |       |       |       |
-| handle_start                       |       |       |       |
+| handle_start_main                  |       |       |       |
 | ---------------------------------- | ----- | ----- | ----- |
 | OTHERS                             | Unit  | Integ | Func  |
 | ---------------------------------- | ----- | ----- | ----- |
