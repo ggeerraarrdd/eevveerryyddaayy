@@ -17,7 +17,7 @@ from src.forms.form_entry import _create_entry_form_main
 
 
 
-def test_url_widget_creation():
+def test_create_entry_form_main():
     """
     TD
     """
@@ -25,11 +25,6 @@ def test_url_widget_creation():
 
     test_widgets_package = _create_entry_form_widgets(test_config)
     test_output = _create_entry_form_main(test_config, test_widgets_package)
-
-    test_config = ConfigManager()
-    test_widgets_package = _create_entry_form_widgets(test_config)
-
-    test_output: VBox = _create_entry_form_main(test_config, test_widgets_package)
 
     # pylint: disable=unsubscriptable-object, not-an-iterable
 
