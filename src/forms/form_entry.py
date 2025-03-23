@@ -26,7 +26,9 @@ from src.config import ConfigManager
 
 
 
-def _create_entry_form_widgets(config: ConfigManager) -> Dict[str, widgets.Widget]:
+def _create_entry_form_widgets(
+        config: ConfigManager
+    ) -> Dict[str, widgets.Widget]:
     """
     Creates and returns the layout settings and widget definitions for the form.
     
@@ -249,7 +251,10 @@ def _create_entry_form_main(config: ConfigManager, pidgets: Dict[str, widgets.Wi
     return section_main
 
 
-def _create_entry_form_button(config: ConfigManager, pidgets: Dict[str, widgets.Widget]) -> widgets.VBox:
+def _create_entry_form_button(
+        config: ConfigManager,
+        pidgets: Dict[str, widgets.Widget]
+    ) -> widgets.VBox:
     """
     Creates the form submission button section with validation logic.
     
@@ -347,7 +352,9 @@ def _create_entry_form_button(config: ConfigManager, pidgets: Dict[str, widgets.
     return section_button
 
 
-def create_entry_form(config: ConfigManager) -> widgets.VBox:
+def create_entry_form(
+        config: ConfigManager
+    ) -> widgets.VBox:
     """
     Creates and returns the complete form interface.
     
