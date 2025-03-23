@@ -13,6 +13,7 @@ from src.utils.utils_validation import validate_project
 
 
 
+
 def test_validate_project():
     """
     TD
