@@ -14,7 +14,9 @@ from src.config import ConfigManager
 
 
 
-def validate_project() -> bool:
+def validate_project(
+        config: ConfigManager = ConfigManager()
+    ) -> bool:
     """
     Validate project is initialized or not.
 
@@ -33,8 +35,6 @@ def validate_project() -> bool:
         ValueError
             If project is in an invalid state regarding files and SEQ_START
     """
-    config = ConfigManager()
-
     is_seq_date = bool(config.get('PROJ_START'))
 
     # Project is not initialized if PROJ_START is not set
