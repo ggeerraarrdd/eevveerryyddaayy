@@ -72,7 +72,7 @@ def test_handle_runs_implement_index_no_nb():
         test_package.update_value('package', 'submitted_solution','Test Submitted Solution')
         test_package.update_value('package', 'site_solution', 'Test Site Solution')
         test_package.update_value('package', 'notes', 'Test Notes')
-        test_package.update_value('package', 'nb', 'Test NB')
+        test_package.update_value('package', 'nb', 'TBD')
         test_package.update_value('package', 'seq_full', '001_01')
         test_package.update_value('package', 'filename', '001_01_test_title')
 
