@@ -27,7 +27,7 @@ prompt_toolkit==3.0.51
 psutil==7.0.0
 ptyprocess==0.7.0
 pure_eval==0.2.3
-Pygments==2.19.1
+Pygments==2.19.2
 pytest==8.4.1
 pytest-cov==6.2.1
 pytest-mock==3.14.1
